@@ -18,12 +18,11 @@ const Footer = (props) => {
           </span>
         </a>{" "}
         using <i className="fab fa-react" />
-        <p>
+        {/* <p>
           <small className="text-muted">
-            Project code is open source. Feel free to fork and make your own
-            version.
+            Skeleton Code Credit goes to Hashir Shoaib
           </small>
-        </p>
+        </p> */}
       </Container>
     </footer>
   );
