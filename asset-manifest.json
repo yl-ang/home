@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/home/static/css/main.fe927caf.css",
+    "main.js": "/home/static/js/main.9039dd24.js",
+    "static/js/787.4b24f717.chunk.js": "/home/static/js/787.4b24f717.chunk.js",
+    "static/media/yl-ang.jpg": "/home/static/media/yl-ang.11d7ee940f5a9b343dd0.jpg",
+    "static/media/jpmc.png": "/home/static/media/jpmc.6416e7b4750c75900c0b.png",
+    "static/media/govtech.jpg": "/home/static/media/govtech.581e058de628e57c5a85.jpg",
+    "static/media/paypal.png": "/home/static/media/paypal.301460971fecf52da5be.png",
+    "index.html": "/home/index.html",
+    "main.fe927caf.css.map": "/home/static/css/main.fe927caf.css.map",
+    "main.9039dd24.js.map": "/home/static/js/main.9039dd24.js.map",
+    "787.4b24f717.chunk.js.map": "/home/static/js/787.4b24f717.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fe927caf.css",
+    "static/js/main.9039dd24.js"
+  ]
+}
