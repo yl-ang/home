@@ -38,7 +38,7 @@ const repos = {
   heading: "Recent Projects",
   gitHubUsername: "yl-ang",
   reposLength: 4,
-  specificRepos: ["CandleSticks", "static-program-analyzer", "PeerPrep", "PayItForward", "BuddySplit"],
+  specificRepos: ["CandleSticks", "static-program-analyzer", "unix-shell", "PeerPrep", "PayItForward", "BuddySplit"],
 };
 
 // Leadership SECTION

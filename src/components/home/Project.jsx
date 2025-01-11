@@ -14,8 +14,6 @@ const dummyProject = {
   pushed_at: null,
 };
 const API = "https://api.github.com";
-// const gitHubQuery = "/repos?sort=updated&direction=desc";
-// const specficQuerry = "https://api.github.com/repos/hashirshoaeb/";
 
 const Project = ({ heading, username, length, specfic }) => {
   const allReposAPI = `${API}/users/${username}/repos?sort=updated&direction=desc`;
@@ -52,7 +50,7 @@ const Project = ({ heading, username, length, specfic }) => {
 
   useEffect(() => {
     fetchRepos();
-  }, [fetchRepos]);
+  }, []);
 
   return (
     <Jumbotron fluid id="projects" className="bg-light m-0">
