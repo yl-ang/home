@@ -5,11 +5,11 @@ const navBar = {
 
 // Main Body SECTION
 const mainBody = {
-  gradientColors: "#4484ce, #1ad7c0, #ff9b11, #9b59b6, #c39797, #ecf0f1",
+  gradientColors: "#4484ce, #1ad7c0, #ff9b11, #9b59b6,rgb(215, 108, 108),rgb(231, 0, 146)",
   firstName: "Ang Yong Liang",
   middleName: "",
   lastName: "",
-  message: "Passionate about building enterprise softwares",
+  message: "Software Engineer | Full Stack Developer | Cyber Security Enthusiast",
   icons: [
     {
       image: "fa-github",
@@ -27,7 +27,7 @@ const about = {
   heading: "About Me",
   imageLink: require("../editable-stuff/yl-ang.jpg"),
   imageSize: 375,
-  message: "My name is Yong Liang, and I am a software engineer with a passion for building enterprise software. I have experience in Java, JavaScript, Python, C/C++, and React. I am currently working at JPMorgan Chase & Co. as a Software Engineer. Previously, I worked at PayPal, GovTech, and DSO National Laboratories, where I focused on developing applications and enhancing security. I hold a Bachelor of Computing degree in Computer Science from the National University of Singapore.",
+  message: "I’m Yong Liang, a software engineer with experience in Java, JavaScript, Python, and C/C++. Currently working at JPMorgan Chase & Co., I’ve previously developed applications and enhanced security at PayPal, GovTech, and DSO National Laboratories. I hold a Bachelors in Computer Science from NUS.",
   resume: "https://docs.google.com/document/d/1IDXvwKZ68OKuh_XO9-e_DTV1Zv_ynELx/edit?usp=sharing",
 };
 
@@ -83,27 +83,13 @@ const leadership = {
 // SKILLS SECTION
 const skills = {
   show: true,
-  heading: "Skills",
-  hardSkills: [
-    { name: "Java", value: 90 },
-    { name: "JavaScript", value: 90 },
-    { name: "Python", value: 90 },
-    { name: "React", value: 90 },
-    { name: "C/C++", value: 80 },
-    { name: "SQL", value: 70 },
-    { name: "Golang", value: 60 },
-    { name: "C#", value: 60 },
-  ],
-  otherSkills: [
-    { name: "Spring Boot", value: 90 },
-    { name: "Oracle Database", value: 90 },
-    { name: "AWS", value: 80 },
-    { name: "Django", value: 80 },
-    { name: "MongoDB", value: 70 },
-    { name: "PostgreSQL", value: 60 },
-    { name: "Docker", value: 60 },
-    { name: "Hadoop", value: 60 },
-  ],
+  heading: "Technologies I used",
+  categories: {
+    Languages: ["Java", "JavaScript", "Python", "C/C++", "Golang", "C#"],
+    Databases: ["Oracle Database", "MongoDB", "PostgreSQL", "Cassandra", "Firebase", "Elasticsearch"],
+    Frameworks: ["React", "Spring Boot", "Django", "Envoy Proxy", "GraphQL", , "JUnit", "Mockito", "React Native", "Node.js", "Express.js"],
+    Tools: ["AWS", "Terraform", "Google Cloud Platform", "Splunk", "Kubernetes", "Kafka", "Docker", "JProfiler", "Jenkins", "Linux"],
+  },
 };
 
 const getInTouch = {

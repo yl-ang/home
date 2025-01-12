@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Blog = (props) => {
   return (
     <div className="container-lg mt-5 bg-blue">
-      <h1 className="text-center">Blogs</h1>
+      <h2 className="display-4 pb-5 text-center">Blogs</h2>
       {bloglist.map((value, index) => {
         return (
           <BlogCard
@@ -32,7 +32,7 @@ const BlogCard = ({ index, title, image, description }) => {
             <div className="">
               <h1 className="">{title}</h1>
               <p className="lead">{description}</p>
-              <Link to={`${process.env.PUBLIC_URL}blog/${index}`}>
+              <Link to={`/blog/${index}`}>
                 Read more...{" "}
               </Link>
             </div>
