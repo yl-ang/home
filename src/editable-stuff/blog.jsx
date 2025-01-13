@@ -7,6 +7,8 @@ const blog = new BlogBuilder({
   description:
     "A walkthrough of how I studied and passed the HashiCorp Terraform Associate (003) exam.",
 })
+  .addHeading("Motivation to take the exam")
+  .addParagraph("I decided to pursue the Terraform Associate exam to deepen my understanding of Infrastructure as Code (IaC) concepts and explore the benefits of using Terraform. I initially planned to take the cert in Jan 2024, but I was busy with school. Now, during my downtime in December, I’ve revisited the goal and decided to give it another try, and learned more about Terraform.")
   .addHeading("Exam Tips")
   .addParagraph(
     <>

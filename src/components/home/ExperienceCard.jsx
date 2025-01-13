@@ -22,7 +22,7 @@ const ExperienceCard = ({ data }) => {
               className="bg-white"
               src={data.companylogo}
               alt={`${data.role} at ${data.division}`}
-              style={{ width: '100%', maxWidth: '120px', objectFit: 'contain' }}
+              style={{ width: '100%', maxWidth: '120px', objectFit: 'contain', marginBottom: '20px' }}
             />
           </Col>
 

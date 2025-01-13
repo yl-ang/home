@@ -69,7 +69,7 @@ const projects = {
     {
       name: "NsStayFit",
       description: "NsStayFit is an Android app developed using React-Native. The app aims to automate IPPT and NS Fit sessions, allowing NSmen to take their physical fitness tests anywhere and anytime.",
-      url: "https://github.com/yl-ang/PayItForward",
+      url: "https://github.com/yl-ang/NsStayFit",
       technologies: ["Javascript", "React Native", "UI Kitten", "Tailwind CSS", "Expo", "Firebase", "Figma"],
     },
   ],

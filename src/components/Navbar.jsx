@@ -8,33 +8,46 @@ import { NavLink } from "./home/migration";
 
 const Navigation = React.forwardRef((props, ref) => {
   const [isTop, setIsTop] = useState(true);
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const navbarMenuRef = useRef();
+  const navbarMenuRef = useRef(null);
   const navbarDimensions = useResizeObserver(navbarMenuRef);
-  const navBottom = navbarDimensions ? navbarDimensions.bottom : 0;
 
+  // Hook to monitor scroll position
   useScrollPosition(
-    ({ prevPos, currPos }) => {
-      if (!navbarDimensions || !ref.current) return;
-      currPos.y + ref.current.offsetTop - navbarDimensions.bottom > 5
-        ? setIsTop(true)
-        : setIsTop(false);
-      setScrollPosition(currPos.y);
+    ({ currPos }) => {
+      if (!navbarDimensions) return;
+
+      const isNavbarAtTop = currPos.y >= -5; // Adjust this threshold as needed
+      setIsTop(isNavbarAtTop);
     },
-    [navBottom]
+    [navbarDimensions]
   );
 
+  // Initial effect to ensure correct navbar state on load
   useEffect(() => {
-    if (!navbarDimensions || !ref.current) return;
-    navBottom - scrollPosition >= ref.current.offsetTop
-      ? setIsTop(false)
-      : setIsTop(true);
-  }, [navBottom, navbarDimensions, ref, scrollPosition]);
+    if (!navbarDimensions) return;
+
+    const handleScroll = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const isNavbarAtTop = scrollTop <= 5; // Adjust threshold to fit your design
+      setIsTop(isNavbarAtTop);
+    };
+
+    // Set the initial navbar state on load
+    handleScroll();
+
+    // Add scroll listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Cleanup listener on unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [navbarDimensions]);
 
   return (
     <Navbar
       ref={navbarMenuRef}
-      className={`px-3 fixed-top  ${!isTop ? "navbar-white" : "navbar-transparent"}`}
+      className={`px-3 fixed-top ${isTop ? "navbar-transparent" : "navbar-white"}`}
       expand="lg"
     >
       <Navbar.Brand className="navbar-brand" href={process.env.PUBLIC_URL + "/#home"}>
