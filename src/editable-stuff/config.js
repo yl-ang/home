@@ -27,7 +27,7 @@ const about = {
   heading: "About Me",
   imageLink: require("../editable-stuff/yl-ang.jpg"),
   imageSize: 375,
-  message: "I’m Yong Liang, a software engineer with experience in Java, JavaScript, Python, and C/C++. Currently working at JPMorgan Chase & Co., I’ve previously developed applications and enhanced security at PayPal, GovTech, and DSO National Laboratories. I hold a Bachelors in Computer Science from NUS.",
+  message: "I’m Yong Liang, a software engineer with experience in Java, JavaScript, Python, and C/C++. I’ve contributed to engineering and security projects at JPMorgan, PayPal, GovTech, and DSO, and I hold a Computer Science degree from NUS.",
   resume: "https://docs.google.com/document/d/1IDXvwKZ68OKuh_XO9-e_DTV1Zv_ynELx/edit?usp=sharing",
 };
 
@@ -134,7 +134,7 @@ const experiences = {
       companylogo: require('../assets/img/paypal.png'),
       division: 'Global Compliance Engineering',
       date: 'Aug 2023 – Dec 2023',
-      description: "Developed full-stack features for PayPal’s KYC Platform, meeting regulatory and business needs"
+      description: "Global Compliance Engineering"
     },
     {
       role: 'Software Engineer Intern',
@@ -142,7 +142,7 @@ const experiences = {
       companylogo: require('../assets/img/jpmc.png'),
       division: 'Direct Custody & Clearing',
       date: 'May 2023 – Aug 2023',
-      description: "Taiwan Sub-Custodian & Trade Settlement"
+      description: "Securities Services Technology"
     },
     {
       role: 'Software Engineer Intern',

@@ -2,7 +2,7 @@ import React from "react";
 import { BlogBuilder } from "./BlogBuilder";
 import bloglist from "../../editable-stuff/blog";
 import { Link } from "react-router-dom";
-const Blog = (props) => {
+const Blog = () => {
   return (
     <div className="container-lg mt-5 bg-blue">
       <h2 className="display-4 pb-5 text-center">Blogs</h2>
