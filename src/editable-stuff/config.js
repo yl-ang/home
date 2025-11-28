@@ -5,11 +5,11 @@ const navBar = {
 
 // Main Body SECTION
 const mainBody = {
-  gradientColors: "#4484ce, #1ad7c0, #ff9b11, #9b59b6,rgb(215, 108, 108),rgb(231, 0, 146)",
+  gradientColors: "#000000",
   firstName: "Ang Yong Liang",
   middleName: "",
   lastName: "",
-  message: "Software Engineer | Full Stack Developer | Cyber Security Enthusiast",
+    message: "Software Engineer | Platform Engineer | Data Engineer",
   icons: [
     {
       image: "fa-github",
@@ -105,29 +105,36 @@ const experiences = {
   heading: "Experiences",
   data: [
     {
-      role: 'Software Engineer I',
+      role: 'Software Engineer',
       company: "JPMorgan Chase & Co.",
       companylogo: require('../assets/img/jpmc.png'),
-      division: 'Post Trade Technology',
+        division: 'Post Trade Engineering',
       date: 'Aug 2024 - Present',
-      description: "Part of Platform Engineering Team within Post Trade Technology, enhancing resilience, scalability, and performance of distributed services supporting business clients",
-      bulletPoints: [
-        "Implemented resiliency, and performance improvement features with Spring Boot, and React microservices",
-        "Diagnosed and resolved service failures and live issues, using tools like Kubernetes, Splunk, Postman, and Linux to pinpoint root causes and propose solutions"
-      ]
+      description: "Post Trade Engineering"
+    },
+    {
+      role: 'Coding Mentor',
+      company: "ComputhinkSG",
+      companylogo: require('../assets/img/computhinksg.jpeg'),
+      division: '-',
+      date: 'Jan 2024 – June 2024',
+      description: "Taught Scratch, Python, and algorithms to students"
+    },
+    {
+      role: 'Teaching Assistant',
+      company: "NUS Computing",
+      companylogo: require('../assets/img/nus_computing.jpeg'),
+      division: '-',
+      date: 'Jan 2024 – June 2024',
+      description: "CS4238 & CS2107"
     },
     {
       role: 'Software Engineer Intern',
       company: "PayPal",
       companylogo: require('../assets/img/paypal.png'),
-      division: 'Global Compliance (Engineering)',
+      division: 'Global Compliance Engineering',
       date: 'Aug 2023 – Dec 2023',
-      description: "Worked with Global Compliance team to deliver reconciliation features for internal teams and users",
-      bulletPoints: [
-        "Built frontend (ReactJs, TypeScript) and backend (Spring Boot, Java, Python, Oracle DB) capabilities, including search, inactive account deactivation, and automated email notifications",
-        "Collaborated with API team, leveraging OpenAPI, to update and refine platform’s existing API specification",
-        "Developed and tested SQL scripts for applying, verifying, and rolling back oracle database changes",
-      ]
+      description: "Developed full-stack features for PayPal’s KYC Platform, meeting regulatory and business needs"
     },
     {
       role: 'Software Engineer Intern',
@@ -135,11 +142,7 @@ const experiences = {
       companylogo: require('../assets/img/jpmc.png'),
       division: 'Direct Custody & Clearing',
       date: 'May 2023 – Aug 2023',
-      description: "Collaborated with Securities Services team to deliver custody and depositary services for business clients",
-      bulletPoints: [
-        "Improved customer relationship management tool with new Elasticsearch functionality (ReactJs, TypeScript), reducing search time by 80%",
-        "Created SpringBoot microservices to map SWIFT messages, processing up to 30,000 messages monthly"
-      ]
+      description: "Taiwan Sub-Custodian & Trade Settlement"
     },
     {
       role: 'Software Engineer Intern',
@@ -147,7 +150,7 @@ const experiences = {
       companylogo: require('../assets/img/govtech.jpg'),
       division: 'Ministry of Manpower',
       date: 'Jan 2023 – Jan 2023',
-      description: "Worked on the Tech iOSH Refresh Project, developing and standardizing UI components.",
+      description: "Worked on the Tech iOSH Refresh Project, developing and standardizing UI components",
     },
     {
       role: 'Software Security Intern',
@@ -155,12 +158,7 @@ const experiences = {
       companylogo: require('../assets/img/dso.png'),
       division: 'Cyber Security Laboratories',
       date: 'May 2022 – Jul 2022',
-      description: "Researched into Microsoft Kernel Driver CVEs, performed root cause analysis on systems",
-      bulletPoints: [
-        "Reviewed Windows driver code and API endpoints using Ghidra, IdaPro, and WinDbg",
-        "Built C++ proof-of-concept scripts with Win32 APIs, tested in sandboxed VMs to ensure security and stability",
-        "Created Java program for taint analysis, identifying common program vulnerabilities"
-      ]
+      description: "Windows Kernel Research (C++, Java)"
     },
     {
       role: 'Software Security Intern',
@@ -168,12 +166,7 @@ const experiences = {
       companylogo: require('../assets/img/dso.png'),
       division: 'Cyber Security Laboratories',
       date: 'May 2021 – Jul 2021',
-      description: "Researched into Microsoft Outlook CVEs, performed root cause analysis on systems",
-      bulletPoints: [
-        "Developed Python plugins for tools like Metasploit and Core Impact, enhance enterprise penetration testing capabilities",
-        "Reversed engineered C# applications using DnSpy, identifying and patching vulnerabilities",
-        "Analyzed post-exploitation techniques employed by adversaries such as ransomware and crypto mining, gaining insights into emerging threats and vulnerabilities"
-      ]
+      description: "CVE Research (C#, Python)"
     },
     {
       role: 'Penetration Testing Intern',
@@ -181,12 +174,7 @@ const experiences = {
       companylogo: require('../assets/img/dso.png'),
       division: 'Cyber Security Laboratories',
       date: 'Apr 2020 – Jul 2020',
-      description: "Researched into antivirus software, penetration testing, and malware analysis",
-      bulletPoints: [
-        "Utilized metasploit to create custom payloads and exploits, testing against antivirus software",
-        "Developed Kernel drivers in C/C++ to assess antivirus software detection capabilities",
-        "Created custom python scripts to automate penetration testing tasks"
-      ]
+      description: "Antivirus Malware Research (C++, C, Python)"
     },
   ]
 }

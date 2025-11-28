@@ -63,7 +63,7 @@ const App = () => {
   const titleRef = useRef();
 
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL + "/"}>
+  <BrowserRouter basename="/home">
       {navBar.show && <Navbar ref={titleRef} />}
       <Routes>
         <Route path="/" element={<Home />} />
