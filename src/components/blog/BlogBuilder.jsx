@@ -28,6 +28,29 @@ class BlogBuilder {
     return this;
   };
 
+  addImage = (src, alt) => {
+    this.list.push(
+      <img
+        key={this.list.length}
+        className="img-fluid d-block mx-auto mb-4"
+        src={src}
+        alt={alt}
+      />
+    );
+    return this;
+  };
+
+  addList = (items) => {
+    this.list.push(
+      <ul key={this.list.length} className="lead">
+        {items.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
+    );
+    return this;
+  };
+
   getBlog = () => {
     return <div className="container-lg">{this.list}</div>;
   };
