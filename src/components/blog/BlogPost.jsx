@@ -10,7 +10,9 @@ const BlogPost = () => {
     <div className="container-lg mt-5">
       {post ? (
         <div>
-          <img className="img-fluid mb-2 d-block mx-auto" src={post.image} alt={post.title} />
+          {post.image && (
+            <img className="img-fluid mb-2 d-block mx-auto" src={post.image} alt={post.title} />
+          )}
           {/* <h1 className="display-3 text-center">{post.title}</h1> */}
           {post.getBlog()}
         </div>

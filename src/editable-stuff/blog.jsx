@@ -145,4 +145,78 @@ const blog1 = new BlogBuilder({
 
 bloglist.push(blog1);
 
+const blog3 = new BlogBuilder({
+  title: "Python GIL, Threads, Processes and Asyncio",
+  description:
+    "Notes on concurrency vs parallelism, what the GIL really limits, and when to use multithreading, multiprocessing or asyncio.",
+})
+  .addHeading("Concurrency vs parallelism")
+  .addParagraph(
+    <>
+      These notes are based on{" "}
+      <a
+        href="https://medium.com/data-science/deep-dive-into-multithreading-multiprocessing-and-asyncio-94fdbe0c91f0"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        this deep dive into multithreading, multiprocessing and asyncio
+      </a>{" "}
+      on Medium, which has good diagrams that I recommend reading alongside this post.
+    </>
+  )
+  .addList([
+    "Concurrency is about managing multiple tasks at the same time, but not necessarily simultaneously. Tasks take turns, which creates the illusion of multitasking.",
+    "Parallelism is about running multiple tasks simultaneously, typically on multiple CPU cores.",
+  ])
+  .addHeading("Programs, processes and threads")
+  .addParagraph("A program sits on disk and is passive. Once the OS loads it into memory to run, it becomes a process: an independent instance of a running program with its own memory space, resources and execution state. Processes are isolated from each other, so one cannot interfere with another unless they communicate explicitly through inter-process communication (IPC).")
+  .addParagraph("A thread is the smallest unit of execution inside a process. Every process has at least one thread, the main thread, and can create more. Threads are lightweight and share the memory and resources of their process, which makes communication efficient. The downside is that sharing leads to race conditions and deadlocks if it isn't managed carefully, and one misbehaving thread can crash the whole process.")
+  .addParagraph("Processes tend to be one of two kinds:")
+  .addList([
+    "I/O bound: spend most of their time waiting for file access, network responses or user input, while the CPU sits idle. During blocking I/O, CPython releases the GIL so another thread in the same process can run.",
+    "CPU bound: spend most of their time computing, such as video encoding or numerical analysis. The GIL isn't released for a thread doing heavy CPU work, so extra cores don't help a multithreaded CPU-bound program.",
+  ])
+  .addHeading("How the OS juggles them")
+  .addParagraph("A CPU core can only execute one task at a time, so the OS uses preemptive context switching: it pauses the current task, saves its state and loads the state of the next one. Done rapidly, this looks like simultaneous execution on a single core.")
+  .addParagraph("Switching between processes is more expensive because the OS has to save and load separate memory spaces. Switching between threads is cheaper because they share memory, but switching too often still adds overhead and can slow things down.")
+  .addHeading("The GIL")
+  .addParagraph("The Global Interpreter Lock (GIL) is a lock that lets only one thread hold control of the Python interpreter at a time, so only one thread executes Python bytecode at once. It exists to simplify memory management: many internal operations, such as object creation, are not thread safe by default. Without the GIL, threads sharing memory would need complex locking to prevent race conditions and data corruption.")
+  .addParagraph("When it becomes a bottleneck:")
+  .addList([
+    "Single-threaded programs: the GIL is irrelevant, since the one thread has exclusive access to the interpreter.",
+    "Multithreaded I/O-bound programs: usually fine, because threads release the GIL while they wait for I/O.",
+    "Multithreaded CPU-bound programs: a significant bottleneck. The threads compete for the GIL and take turns running bytecode, so you get no parallel speed-up.",
+  ])
+  .addHeading("Multiprocessing")
+  .addParagraph("Multiprocessing runs multiple processes in parallel, each with its own memory, its own GIL and its own resources (and possibly several threads). Because every process has its own interpreter, it sidesteps the GIL, which makes it the right fit for CPU-bound work. The price is more resource use, from separate memory and process start-up overhead.")
+  .addHeading("Asyncio")
+  .addParagraph("Asyncio uses a single thread to handle many tasks. You write code with the async and await keywords, and the key concepts are:")
+  .addList([
+    "Coroutines: functions defined with async def. They are the core of asyncio and represent work that can be paused and resumed later, a bit like yield.",
+    "Event loop: manages the execution of tasks.",
+    "Tasks: wrappers around coroutines. A coroutine only starts running concurrently once you turn it into a task with asyncio.create_task().",
+    "await: pauses the current coroutine and gives control back to the event loop.",
+  ])
+  .addParagraph("The difference is easiest to see with three downloads. Without asyncio you wait for A to finish before starting B, then B before C. With asyncio, each task starts, hits its network wait, and hands control back so the next one can start:")
+  .addCode(`Without asyncio
+Task A: [work] WAIT........ DONE
+Task B:                          [work] WAIT........ DONE
+Task C:                                                   [work] WAIT........ DONE
+
+With asyncio
+Task A: [work] WAIT............ DONE
+Task B:        [work] WAIT............ DONE
+Task C:               [work] WAIT............ DONE
+                ^ switch between tasks`)
+  .addParagraph("When a task runs await network_request(), it is essentially saying: \"I'm waiting for the network and can't do anything right now, so let another task run.\"")
+  .addHeading("Which one should I use?")
+  .addParagraph("Ask two questions: is the task I/O bound, and if so, is the I/O very slow?")
+  .addList([
+    "Multiprocessing: best for CPU-bound, computationally heavy tasks, or whenever you need to bypass the GIL. Each process has its own interpreter, which gives true parallelism.",
+    "Multithreading: best for fast I/O-bound tasks, since context switches are less frequent and the interpreter stays on one thread for longer. Not ideal for CPU-bound work because of the GIL.",
+    "Asyncio: ideal for slow I/O-bound tasks such as long network requests or database queries, because it handles waiting efficiently and scales well. It isn't suitable for CPU-bound tasks unless you offload that work to other processes.",
+  ]);
+
+bloglist.push(blog3);
+
 export default bloglist;

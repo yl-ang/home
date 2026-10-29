@@ -40,6 +40,15 @@ class BlogBuilder {
     return this;
   };
 
+  addCode = (code) => {
+    this.list.push(
+      <pre key={this.list.length} className="bg-dark text-light p-3 rounded mb-4">
+        <code>{code}</code>
+      </pre>
+    );
+    return this;
+  };
+
   addList = (items) => {
     this.list.push(
       <ul key={this.list.length} className="lead">
