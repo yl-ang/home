@@ -1,8 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="0; url=./index.html" />
+    <meta charset="utf-8" />
+    <title>Ang Yong Liang</title>
+    <script>
+      // GitHub Pages SPA fallback: turn /home/blog/0 into /home/?/blog/0 so the
+      // app's index.html loads, then index.html restores the original URL.
+      // This is a project site (/home), so keep 1 leading path segment.
+      var pathSegmentsToKeep = 1;
+      var l = window.location;
+      l.replace(
+        l.protocol +
+          "//" +
+          l.hostname +
+          (l.port ? ":" + l.port : "") +
+          l.pathname
+            .split("/")
+            .slice(0, 1 + pathSegmentsToKeep)
+            .join("/") +
+          "/?/" +
+          l.pathname.slice(1).split("/").slice(pathSegmentsToKeep).join("/").replace(/&/g, "~and~") +
+          (l.search ? "&" + l.search.slice(1).replace(/&/g, "~and~") : "") +
+          l.hash
+      );
+    </script>
   </head>
-  <body>
-  </body>
+  <body></body>
 </html>
