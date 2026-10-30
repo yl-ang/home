@@ -3,7 +3,7 @@ import { useScrollPosition } from "../hooks/useScrollPosition";
 import useResizeObserver from "../hooks/useResizeObserver";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import { mainBody, projects, about, skills } from "../editable-stuff/config.js";
+import { mainBody, projects, about } from "../editable-stuff/config.js";
 import { NavLink } from "./home/migration";
 import { useLocation } from "react-router-dom";
 
@@ -107,12 +107,8 @@ const Navigation = React.forwardRef((props, ref) => {
             {projects.show && (
                 <NavLink href={process.env.PUBLIC_URL + "/#projects"}>Projects</NavLink>
             )}
-            <NavLink className="nav-item lead" href={process.env.PUBLIC_URL + "/#experiences"}>Experience</NavLink>
             {about.show && (
                 <NavLink className="nav-item lead" href={process.env.PUBLIC_URL + "/#aboutme"}>About</NavLink>
-            )}
-            {skills.show && (
-                <NavLink className="nav-item lead" href={process.env.PUBLIC_URL + "/#skills"}>Skills</NavLink>
             )}
           </Nav>
         </Navbar.Collapse>

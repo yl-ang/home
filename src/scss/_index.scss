@@ -109,23 +109,3 @@ code {
     transition: transform 0.3s, box-shadow 0.3s;
   }
 }
-.skills-tabs {
-  flex-grow: 1;
-}
-.skills-tab {
-  flex-grow: 1;
-  text-align: center;
-}
-
-.progress {
-  transform-origin: left;
-  & > * {
-    transform: scaleX(0);
-  }
-}
-.progress-bar-animation {
-  @extend .progress;
-  & > * {
-    animation: progress 1.5s ease-in-out forwards;
-  }
-}
