@@ -5,9 +5,12 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { mainBody, projects, about, skills } from "../editable-stuff/config.js";
 import { NavLink } from "./home/migration";
+import { useLocation } from "react-router-dom";
 
 const Navigation = React.forwardRef((props, ref) => {
   const [isTop, setIsTop] = useState(true);
+  // Only the landing page has a dark hero; other routes are light from the start.
+  const isHome = useLocation().pathname === "/";
   const navbarMenuRef = useRef(null);
   const navbarDimensions = useResizeObserver(navbarMenuRef);
 
@@ -91,7 +94,7 @@ const Navigation = React.forwardRef((props, ref) => {
   return (
       <Navbar
           ref={navbarMenuRef}
-          className={`px-3 fixed-top ${isTop ? "navbar-transparent" : "navbar-white"}`}
+          className={`px-3 fixed-top ${isTop && isHome ? "navbar-transparent" : "navbar-white"}`}
           expand="lg"
       >
         <style>{navbarCss}</style>
