@@ -1,0 +1,7 @@
+.site-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-color: #05070f;
+  pointer-events: none;
+}

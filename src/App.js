@@ -22,39 +22,42 @@ import BlogPost from "./components/blog/BlogPost";
 import GetInTouch from "./components/home/GetInTouch.jsx";
 import Leadership from "./components/home/Leadership.jsx";
 import Experience from "./components/home/Experience";
+import SiteBackground from "./components/background/SiteBackground";
 
 const Home = React.forwardRef((props, ref) => {
   return (
     <>
+      <SiteBackground />
       <MainBody
-        gradient={mainBody.gradientColors}
         title={`${mainBody.firstName} ${mainBody.middleName} ${mainBody.lastName}`}
         message={mainBody.message}
         icons={mainBody.icons}
         ref={ref} // Make sure ref is forwarded properly
       />
-      {about.show && (
-        <AboutMe
-          heading={about.heading}
-          message={about.message}
-          link={about.imageLink}
-          imgSize={about.imageSize}
-        />
-      )}
-      {blog.show && <Blog heading={Blog.heading} message={Blog.message} email={Blog.email} />}
-      {projects.show && (
-        <Project heading={projects.heading} projects={projects.projects} />
-      )}
-      {experiences.show && <Experience experiences={experiences} />}
-      {leadership.show && (
-        <Leadership
-          heading={leadership.heading}
-          message={leadership.message}
-          img={leadership.images}
-          imageSize={leadership.imageSize}
-        />
-      )}
-      {skills.show && <Skills heading={skills.heading} categories={skills.categories} />}
+      <div className="bg-white position-relative">
+        {about.show && (
+          <AboutMe
+            heading={about.heading}
+            message={about.message}
+            link={about.imageLink}
+            imgSize={about.imageSize}
+          />
+        )}
+        {blog.show && <Blog heading={Blog.heading} message={Blog.message} email={Blog.email} />}
+        {projects.show && (
+          <Project heading={projects.heading} projects={projects.projects} />
+        )}
+        {experiences.show && <Experience experiences={experiences} />}
+        {leadership.show && (
+          <Leadership
+            heading={leadership.heading}
+            message={leadership.message}
+            img={leadership.images}
+            imageSize={leadership.imageSize}
+          />
+        )}
+        {skills.show && <Skills heading={skills.heading} categories={skills.categories} />}
+      </div>
     </>
   );
 });
