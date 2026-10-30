@@ -38,9 +38,7 @@ const Home = React.forwardRef((props, ref) => {
         {about.show && (
           <AboutMe
             heading={about.heading}
-            message={about.message}
             link={about.imageLink}
-            imgSize={about.imageSize}
           />
         )}
         {blog.show && <Blog heading={Blog.heading} message={Blog.message} email={Blog.email} />}

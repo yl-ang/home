@@ -27,7 +27,7 @@ const about = {
   heading: "About Me",
   imageLink: require("../editable-stuff/yl-ang.jpg"),
   imageSize: 375,
-  message: "I’m Yong Liang, a software engineer with experience in Java, JavaScript, Python, and C/C++. I’ve contributed to engineering and security projects at JPMorgan, PayPal, GovTech, and DSO, and I hold a Computer Science degree from NUS.",
+  message: "I’m Yong Liang, a software engineer with experience in Java, JavaScript, and Python. I’ve contributed to engineering and security projects at JPMorgan, PayPal, GovTech, and DSO, and I hold a Computer Science degree from NUS.",
   resume: "https://docs.google.com/document/d/1IDXvwKZ68OKuh_XO9-e_DTV1Zv_ynELx/edit?usp=sharing",
 };
 
@@ -85,7 +85,7 @@ const skills = {
   show: true,
   heading: "Technologies I used",
   categories: {
-    Languages: ["Java", "JavaScript", "Python", "C/C++", "Golang", "C#"],
+    Languages: ["Java", "JavaScript", "Python"],
     Databases: ["Oracle Database", "MongoDB", "PostgreSQL", "Cassandra", "Firebase", "Elasticsearch"],
     Frameworks: ["React", "Spring Boot", "Django", "Envoy Proxy", "GraphQL", , "JUnit", "Mockito", "React Native", "Node.js", "Express.js"],
     Tools: ["AWS", "Terraform", "Google Cloud Platform", "Splunk", "Kubernetes", "Kafka", "Docker", "JProfiler", "Jenkins", "Linux"],
