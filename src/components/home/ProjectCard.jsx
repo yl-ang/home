@@ -1,31 +1,32 @@
-import React, { useState, useEffect, useCallback } from "react";
-import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
-import Skeleton from "react-loading-skeleton";
-import axios from "axios";
+import React from "react";
 
 const ProjectCard = ({ value }) => {
-  const { name, description, url, technologies } = value;
+  const { name, description, url, technologies = [] } = value;
+  const slug = name.toLowerCase();
   return (
-    <Col md={6}>
-      <Card className="card shadow-lg p-3 mb-5 bg-white rounded">
-        <Card.Body>
-          <Card.Title as="h5">{name}</Card.Title>
-          <Card.Text>{description}</Card.Text>
-          <div>
-            {technologies.map((tech, i) => (
-              <span key={i} className="badge bg-secondary me-1">
-                {tech}
-              </span>
-            ))}
-          </div>
-          <hr />
-          <a href={url} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-            View Project
-          </a>
-        </Card.Body>
-      </Card>
-    </Col>
+    <article className="projects__card">
+      <p className="projects__path">
+        <span className="projects__dot" aria-hidden="true" />
+        ~/projects/{slug}
+      </p>
+      <h3 className="projects__title">{name}</h3>
+      <p className="projects__desc">{description}</p>
+      <ul className="projects__tags" aria-label={`${name} tech stack`}>
+        {technologies.map((tech) => (
+          <li key={tech}>{tech}</li>
+        ))}
+      </ul>
+      <hr className="projects__rule" />
+      <a
+        className="projects__btn"
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`View ${name} project (opens in a new tab)`}
+      >
+        View Project <span aria-hidden="true">→</span>
+      </a>
+    </article>
   );
 };
 

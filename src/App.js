@@ -39,7 +39,7 @@ const Home = React.forwardRef((props, ref) => {
         )}
         {blog.show && <Blog heading={Blog.heading} message={Blog.message} email={Blog.email} />}
         {projects.show && (
-          <Project heading={projects.heading} projects={projects.projects} />
+          <Project heading={projects.heading} message={projects.message} projects={projects.projects} />
         )}
         {leadership.show && (
           <Leadership

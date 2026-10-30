@@ -35,42 +35,49 @@ const about = {
 const projects = {
   show: true,
   heading: "Projects",
+  message: "Things I have built: from a Unix shell and a program analyzer to mobile apps.",
   projects: [
     {
       name: "CandleSticks",
+      languages: ["C++"],
       description: "Desktop application for visualizing stock price data. It supports candlestick charting.",
       url: "https://github.com/yl-ang/CandleSticks",
       technologies: ["C++20", "SFML Graphics"],
     },
     {
       name: "unix-shell",
+      languages: ["Java"],
       description: "Command interpreter that provides a set of tools (applications): cd, pwd, ls, cat, echo, head, tail, grep, sed, find and wc. It also supports piping, semicolon operator, and IO redirection.",
       url: "https://github.com/yl-ang/unix-shell",
       technologies: ["Java 17", "Ubuntu 22.04", "JUnit", "Mockito", "GitHub Workflows"],
     },
     {
       name: "PeerPrep",
+      languages: ["JavaScript"],
       description: "PeerPrep is a web application designed using microservices architecture for students to practice technical interviews with their peers.",
       url: "https://github.com/yl-ang/PeerPrep",
       technologies: ["React", "Node.js", "MongoDB", "AWS", "Material UI", "Docker", "Mocha", "Chai", "Jest", "Postman"],
     },
     {
       name: "static-program-analyzer",
+      languages: ["C++"],
       description: "An interactive tool that automatically answers queries about programs.",
       url: "https://github.com/yl-ang/static-program-analyzer",
       technologies: ["C++17", "CMake", "Catch2", "GitHub Workflows"],
     },
     {
       name: "PayItForward",
+      languages: ["JavaScript"],
       description: "PayItForward is a mobile payment application that aims to encourage users to donate a small amount of money every time they make a payment.",
       url: "https://github.com/yl-ang/PayItForward",
-      technologies: ["Javascript", "React Native", "UI Kitten", "Expo", "Figma"],
+      technologies: ["JavaScript", "React Native", "UI Kitten", "Expo", "Figma"],
     },
     {
       name: "NsStayFit",
+      languages: ["JavaScript"],
       description: "NsStayFit is an Android app developed using React-Native. The app aims to automate IPPT and NS Fit sessions, allowing NSmen to take their physical fitness tests anywhere and anytime.",
       url: "https://github.com/yl-ang/NsStayFit",
-      technologies: ["Javascript", "React Native", "UI Kitten", "Tailwind CSS", "Expo", "Firebase", "Figma"],
+      technologies: ["JavaScript", "React Native", "UI Kitten", "Tailwind CSS", "Expo", "Firebase", "Figma"],
     },
   ],
 };
