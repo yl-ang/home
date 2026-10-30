@@ -20,7 +20,7 @@ const SiteBackground = () => {
     <div className="site-background" aria-hidden="true">
       <GradientASCII
         colors={COLORS}
-        shape="eclipse"
+        shape="rise"
         cellSize={cellSize}
         glow={0.15}
         glyphOpacity={0.6}
