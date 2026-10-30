@@ -67,7 +67,7 @@
 }
 .ms-close:hover { color: var(--ms-text); }
 
-.ms-body { padding: 14px 6px 12px; }
+.ms-body { padding: 14px 5px 12px; }
 @media (min-width: 480px) {
   .ms-body { padding: 18px 20px 14px; }
 }
@@ -81,7 +81,7 @@
   margin-bottom: 14px;
   padding: 0 4px;
 }
-.ms-stats { display: flex; gap: 18px; color: var(--ms-cyan); font-weight: 700; font-size: 1.05rem; white-space: nowrap; }
+.ms-stats { display: flex; gap: 14px; color: var(--ms-cyan); font-weight: 700; font-size: 1rem; white-space: nowrap; }
 .ms-actions { display: flex; gap: 10px; flex: 1 1 100%; }
 @media (min-width: 480px) {
   .ms-actions { flex: 0 0 auto; }
@@ -90,12 +90,13 @@
 .ms-btn {
   flex: 1;
   min-height: 44px;
-  padding: 0 16px;
+  padding: 0 12px;
+  white-space: nowrap;
   border-radius: 10px;
   border: 1px solid var(--ms-border);
   background: var(--ms-panel);
   color: var(--ms-cyan);
-  font: 700 0.95rem var(--ms-mono);
+  font: 700 0.9rem var(--ms-mono);
   cursor: pointer;
   touch-action: manipulation;
   transition: border-color 0.15s, background 0.15s, color 0.15s;
@@ -130,7 +131,7 @@
 .ms-cell.flag { color: var(--ms-amber); }
 .ms-cell.mine { color: var(--ms-red); }
 .ms-cell.wrong { color: var(--ms-red); border-color: var(--ms-red); text-decoration: line-through; }
-.ms-cell.boom { background: rgba(255, 123, 123, 0.2); border-color: var(--ms-red); color: var(--ms-red); }
+.ms-cell.boom { background: rgba(255, 123, 123, 0.4); border-color: var(--ms-red); box-shadow: 0 0 12px rgba(255, 123, 123, 0.5); color: var(--ms-text); }
 .ms-cell.n1 { color: #5aa9ff; }
 .ms-cell.n2 { color: #5ee08a; }
 .ms-cell.n3 { color: #ff7b7b; }
