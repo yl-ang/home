@@ -2,46 +2,57 @@ import React from "react";
 import { BlogBuilder } from "./BlogBuilder";
 import bloglist from "../../editable-stuff/blog";
 import { Link } from "react-router-dom";
+import "./Blog.css";
+
 const Blog = () => {
+  const first = bloglist[0];
   return (
-    <div className="container-lg mt-5 bg-blue">
-      <h2 className="display-4 pb-5 text-center">Blogs</h2>
-      {bloglist.map((value, index) => {
-        return (
-          <BlogCard
-            key={index}
-            title={value.title}
-            description={value.description}
-            index={index}
-          />
-        );
-      })}
-    </div>
+    <section id="blogs" className="blogs" aria-labelledby="blogs-heading">
+      <div className="blogs__inner">
+        <p className="blogs__label">// blogs/</p>
+        <h2 id="blogs-heading" className="blogs__heading">Blogs</h2>
+        <p className="blogs__sub">
+          Notes from things I have built, studied and broken along the way.
+        </p>
+
+        <ul className="blogs__grid">
+          {bloglist.map((post, index) => (
+            <li key={post.slug || index}>
+              <BlogCard post={post} index={index} />
+            </li>
+          ))}
+        </ul>
+
+        {first && first.slug && (
+          <p className="blogs__tip">
+            tip: in the About terminal, <code>cat blogs/{first.slug}.md</code> prints the
+            same summary.
+          </p>
+        )}
+      </div>
+    </section>
   );
 };
 
-const BlogCard = ({ index, title, image, description }) => {
-  return (
-    <div className="m-5">
-      <div className="">
-        <div className="row">
-          <div className="col-4 col-lg-12">
-            {/* <img src={image} className="card-img" alt="..." /> */}
-          </div>
-          <div className="col-8 col-lg-12">
-            <div className="">
-              <h1 className="">{title}</h1>
-              <p className="lead">{description}</p>
-              <Link to={`/blog/${index}`}>
-                Read more...{" "}
-              </Link>
-            </div>
-          </div>
-        </div>
-        <hr />
-      </div>
-    </div>
-  );
-};
+// The Read link is stretched over the whole card (see .blogs__read::after),
+// so the card has one tab stop and one accessible name.
+const BlogCard = ({ post, index }) => (
+  <article className="blogs__card">
+    <p className="blogs__path">
+      <span className="blogs__dot" aria-hidden="true" />
+      ~/blogs/{post.slug}.md
+    </p>
+    <h3 className="blogs__title">{post.title}</h3>
+    <p className="blogs__desc">{post.description}</p>
+    <ul className="blogs__tags" aria-label="Tags">
+      {(post.tags || []).map((t) => (
+        <li key={t}>{t}</li>
+      ))}
+    </ul>
+    <Link to={`/blog/${index}`} className="blogs__read" aria-label={`Read: ${post.title}`}>
+      Read <span aria-hidden="true">→</span>
+    </Link>
+  </article>
+);
 
 export { Blog, BlogBuilder };

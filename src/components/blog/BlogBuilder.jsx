@@ -3,8 +3,10 @@ import React, { Fragment } from "react";
 class BlogBuilder {
   list = [];
 
-  constructor({ title, image, description }) {
+  constructor({ title, slug, tags = [], image, description }) {
     this.title = title;
+    this.slug = slug;
+    this.tags = tags;
     this.image = image;
     this.description = description;
   }

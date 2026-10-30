@@ -3,6 +3,8 @@ const bloglist = [];
 
 const blog2 = new BlogBuilder({
   title: "Building Agents with Google's ADK",
+  slug: "google-adk",
+  tags: ["ADK", "Agents", "RAG"],
   image: require('../assets/img/blog1/parallel-agent.png'),
   description:
     "Notes on Google's Agent Development Kit (ADK): agent patterns, evaluating agents, long-term memory and RAG.",
@@ -80,6 +82,8 @@ bloglist.push(blog2);
 
 const blog1 = new BlogBuilder({
   title: "Terraform Associate (003) Guide",
+  slug: "terraform-associate",
+  tags: ["Terraform", "HashiCorp", "Certification"],
   image: require('../assets/img/blog0/terraform associate.png'),
   description:
     "A walkthrough of how I studied and passed the HashiCorp Terraform Associate (003) exam.",
@@ -147,6 +151,8 @@ bloglist.push(blog1);
 
 const blog3 = new BlogBuilder({
   title: "Python GIL, Threads, Processes and Asyncio",
+  slug: "python-concurrency",
+  tags: ["Python", "GIL", "asyncio"],
   description:
     "Notes on concurrency vs parallelism, what the GIL really limits, and when to use multithreading, multiprocessing or asyncio.",
 })

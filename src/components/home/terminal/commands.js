@@ -8,12 +8,15 @@ import {
   experiences,
   getInTouch,
 } from "../../../editable-stuff/config";
+import bloglist from "../../../editable-stuff/blog";
 
 const line = (text, kind, href) => ({ text, kind, href });
 const lines = (arr) => arr.map((t) => (typeof t === "string" ? line(t) : t));
 const pad = (s, n) => s + " ".repeat(Math.max(1, n - s.length));
 
-export const FILES = ["about.md", "projects/", "experience/", "skills.txt", "resume.pdf"];
+export const FILES = ["about.md", "projects/", "experience/", "blogs/", "skills.txt", "resume.pdf"];
+
+const blogFiles = () => bloglist.map((b) => `${b.slug}.md`);
 
 const projectList = () => projects.projects || [];
 const experienceList = () => experiences.data || [];
@@ -59,6 +62,15 @@ const aboutOut = () => [
   line(about.message),
 ];
 
+const blogOut = (post) => [
+  line(`# ${post.title}`, "accent"),
+  line(""),
+  line(post.description),
+  line(`tags: ${(post.tags || []).join(", ")}`, "muted"),
+  line(""),
+  line(`/home/blog/${bloglist.indexOf(post)}`, "link", `/home/blog/${bloglist.indexOf(post)}`),
+];
+
 const helpOut = () => [
   line("Available commands:", "accent"),
   ...lines([
@@ -96,6 +108,7 @@ const commands = {
     const target = (args[0] || "").replace(/\/$/, "");
     if (!target) return [line(FILES.join("  "))];
     if (target === "projects") return lsDir("projects", projectList().map((p) => p.name));
+    if (target === "blogs") return lsDir("blogs", blogFiles());
     if (target === "experience")
       return lsDir("experience", [...new Set(experienceList().map((e) => e.company))]);
     if (FILES.includes(target)) return [line(target)];
@@ -115,9 +128,14 @@ const commands = {
           : [line("cat: resume.pdf: unavailable", "error")];
       case "projects":
       case "experience":
+      case "blogs":
         return [line(`cat: ${name}: Is a directory (try: ${name.replace(/\/$/, "")})`, "error")];
-      default:
+      default: {
+        const m = name.match(/^blogs\/(.+)\.md$/);
+        const post = m && bloglist.find((b) => b.slug === m[1]);
+        if (post) return blogOut(post);
         return [line(`cat: ${name}: No such file or directory`, "error")];
+      }
     }
   },
   projects: () => projectsOut(),
@@ -147,7 +165,9 @@ export function complete(input) {
   const pool =
     parts.length === 1
       ? COMMAND_NAMES
-      : ["cat", "ls"].includes(parts[0])
+      : parts[0] === "cat"
+      ? [...FILES, ...blogFiles().map((f) => `blogs/${f}`)]
+      : parts[0] === "ls"
       ? FILES
       : [];
   const matches = pool.filter((c) => c.startsWith(last));
