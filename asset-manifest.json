@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/home/static/css/main.ceab34aa.css",
-    "main.js": "/home/static/js/main.4fb41169.js",
-    "static/js/23.ee513992.chunk.js": "/home/static/js/23.ee513992.chunk.js",
+    "main.css": "/home/static/css/main.4d5122b8.css",
+    "main.js": "/home/static/js/main.e928e650.js",
+    "static/js/787.4b24f717.chunk.js": "/home/static/js/787.4b24f717.chunk.js",
     "static/media/shared-state.png": "/home/static/media/shared-state.d17736dd8c6b85f70d7d.png",
     "static/media/parallel-then-sequential.png": "/home/static/media/parallel-then-sequential.50b469c01d8f18a9da8f.png",
     "static/media/memory-bank.png": "/home/static/media/memory-bank.05df99ae80555ede148d.png",
@@ -15,12 +15,12 @@
     "static/media/terraform associate.png": "/home/static/media/terraform associate.18595701cec450524e6f.png",
     "static/media/computhinksg.jpeg": "/home/static/media/computhinksg.80e808af9241cdc81e58.jpeg",
     "index.html": "/home/index.html",
-    "main.ceab34aa.css.map": "/home/static/css/main.ceab34aa.css.map",
-    "main.4fb41169.js.map": "/home/static/js/main.4fb41169.js.map",
-    "23.ee513992.chunk.js.map": "/home/static/js/23.ee513992.chunk.js.map"
+    "main.4d5122b8.css.map": "/home/static/css/main.4d5122b8.css.map",
+    "main.e928e650.js.map": "/home/static/js/main.e928e650.js.map",
+    "787.4b24f717.chunk.js.map": "/home/static/js/787.4b24f717.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ceab34aa.css",
-    "static/js/main.4fb41169.js"
+    "static/css/main.4d5122b8.css",
+    "static/js/main.e928e650.js"
   ]
 }
