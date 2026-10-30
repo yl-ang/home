@@ -1,6 +1,7 @@
 import React from "react";
 import Terminal from "./terminal/Terminal";
 import MatrixBackdrop from "./MatrixBackdrop";
+import { registerPhotoTap } from "../minesweeper/Minesweeper";
 import { skills } from "../../editable-stuff/config";
 import "./AboutMe.css";
 
@@ -40,7 +41,8 @@ const AboutMe = ({ heading, link }) => {
           <h2 id="about-heading" className="about__heading">{heading}</h2>
 
           <div className="about__id">
-            <div className="about__photo">
+            {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */}
+            <div className="about__photo" onClick={registerPhotoTap}>
               {photoOk ? (
                 <img src={link} alt="Portrait of Yong Liang" onError={() => setPhotoOk(false)} />
               ) : (

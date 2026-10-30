@@ -48,6 +48,7 @@
   display: grid; place-items: center;
   background: repeating-linear-gradient(135deg, #0b1220 0 10px, #0f1a30 10px 20px);
 }
+.about__photo { touch-action: manipulation; -webkit-tap-highlight-color: transparent; user-select: none; }
 .about__photo img { width: 100%; height: 100%; object-fit: cover; }
 .about__photo-ph { font-family: var(--about-mono); font-size: .75rem; text-align: center; padding: 0 1rem; color: var(--about-text); }
 
@@ -97,6 +98,7 @@
 .term__line--ok { color: var(--about-cyan); }
 .term__line--accent { color: var(--about-cyan); }
 .term__line--muted { color: #64748b; }
+.term__line--warn { color: #ffc857; }
 .term__line--error { color: #f87171; }
 .term__line a { color: var(--about-blue); text-decoration: underline; }
 .term__prompt { color: var(--about-cyan); }

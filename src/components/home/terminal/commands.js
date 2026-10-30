@@ -9,6 +9,7 @@ import {
   getInTouch,
 } from "../../../editable-stuff/config";
 import bloglist from "../../../editable-stuff/blog";
+import { openMinesweeper } from "../../minesweeper/Minesweeper";
 
 const line = (text, kind, href) => ({ text, kind, href });
 const lines = (arr) => arr.map((t) => (typeof t === "string" ? line(t) : t));
@@ -126,6 +127,11 @@ const commands = {
         return about.resume
           ? [line("resume.pdf ->"), line(about.resume, "link", about.resume)]
           : [line("cat: resume.pdf: unavailable", "error")];
+      case ".secret":
+        return [
+          line("nice, you found it. you would make a good pentester.", "warn"),
+          line("psst: ↑ ↑ ↓ ↓ ← → ← → B A", "muted"),
+        ];
       case "projects":
       case "experience":
       case "blogs":
@@ -144,9 +150,17 @@ const commands = {
   date: () => [line(new Date().toString())],
   pwd: () => [line("/home/guest")],
   echo: (args) => [line(args.join(" "))],
+  // Hidden: not in help, ls or Tab completion.
+  sudo: (args) => {
+    if (args[0] !== "minesweeper") {
+      return [line(`guest is not in the sudoers file. This incident will be reported.`, "error")];
+    }
+    openMinesweeper();
+    return [line("[sudo] launching minesweeper.exe ...", "ok")];
+  },
 };
 
-export const COMMAND_NAMES = [...Object.keys(commands), "clear"];
+export const COMMAND_NAMES = [...Object.keys(commands).filter((n) => n !== "sudo"), "clear"];
 
 // Returns { clear: true } or { lines } for a raw input string.
 export function runCommand(raw) {
