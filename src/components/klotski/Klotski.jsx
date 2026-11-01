@@ -1,10 +1,11 @@
 import React from "react";
 import { createPortal } from "react-dom";
-import { COLS, initialPieces, movePiece, canMove, isWon } from "./game";
+import { COLS, initialPieces, movePiece, canMove, isWon, solve } from "./game";
 import "./Klotski.css";
 
 const OPEN_EVENT = "klotski:open";
 const START_PIECE = "cao";
+const SOLVE_STEP_MS = 180;
 const DRAG_THRESHOLD = 0.45; // fraction of a cell the pointer must travel to slide one step
 const ARROWS = { ArrowUp: "up", ArrowDown: "down", ArrowLeft: "left", ArrowRight: "right" };
 const PAD = [
@@ -35,6 +36,8 @@ const Game = ({ onClose }) => {
   const boardRef = React.useRef(null);
   const pieceRefs = React.useRef({});
   const drag = React.useRef(null);
+  const plan = React.useRef([]);
+  const [solving, setSolving] = React.useState(false);
 
   // Focus in on open, back out on close, and freeze the page behind the modal.
   React.useEffect(() => {
@@ -51,15 +54,45 @@ const Game = ({ onClose }) => {
     };
   }, []);
 
+  // Auto-solve: replay the precomputed shortest path, one step per tick.
+  React.useEffect(() => {
+    if (!solving) return undefined;
+    const id = setInterval(() => {
+      const next = plan.current.shift();
+      if (!next) {
+        setSolving(false);
+        return;
+      }
+      setSelected(next.id);
+      dispatch({ type: "move", ...next });
+    }, SOLVE_STEP_MS);
+    return () => clearInterval(id);
+  }, [solving]);
+
+  const toggleSolve = () => {
+    if (solving) {
+      setSolving(false);
+      return;
+    }
+    if (won) return;
+    plan.current = solve(pieces) || [];
+    setSolving(true);
+  };
+
   const select = (id) => {
+    setSolving(false);
     setSelected(id);
     // Safari doesn't focus buttons on click; keep focus inside the dialog so arrow keys land.
     if (pieceRefs.current[id]) pieceRefs.current[id].focus({ preventScroll: true });
   };
 
-  const step = (dir) => dispatch({ type: "move", id: selected, dir });
+  const step = (dir) => {
+    setSolving(false);
+    dispatch({ type: "move", id: selected, dir });
+  };
 
   const restart = () => {
+    setSolving(false);
     dispatch({ type: "reset" });
     select(START_PIECE);
   };
@@ -91,6 +124,9 @@ const Game = ({ onClose }) => {
     if (e.key === "Escape") {
       e.preventDefault();
       onClose();
+    } else if ((e.key === "s" || e.key === "S") && !e.ctrlKey && !e.metaKey && !e.altKey && !e.repeat) {
+      e.preventDefault();
+      toggleSolve();
     } else if (ARROWS[e.key] && !e.ctrlKey && !e.metaKey && !e.altKey) {
       e.preventDefault();
       step(ARROWS[e.key]);
@@ -109,7 +145,11 @@ const Game = ({ onClose }) => {
     }
   };
 
-  const status = won ? `ACCESS GRANTED: Cao Cao escaped in ${moves} moves` : "free Cao Cao: slide the big block to the exit";
+  const status = won
+    ? `ACCESS GRANTED: Cao Cao escaped in ${moves} moves`
+    : solving
+    ? "auto-solving... press S to stop"
+    : "free Cao Cao: slide the big block to the exit";
 
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
@@ -196,7 +236,7 @@ const Game = ({ onClose }) => {
           <p className={`kl-status${won ? " is-win" : ""}`} aria-live="polite">
             {status}
           </p>
-          <p className="kl-hint">tap a piece · drag it or use arrows to slide · Esc to exit</p>
+          <p className="kl-hint">tap a piece · drag it or use arrows to slide · S to auto-solve · Esc to exit</p>
         </div>
       </div>
     </div>

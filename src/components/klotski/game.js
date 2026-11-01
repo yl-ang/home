@@ -48,3 +48,38 @@ export const isWon = (pieces) => {
   const cao = pieces.find((p) => p.id === "cao");
   return cao.r === EXIT.r && cao.c === EXIT.c;
 };
+
+// Pieces of the same shape are interchangeable, so they share one state key.
+const stateKey = (pieces) =>
+  pieces
+    .map((p) => `${p.id === "cao" ? "X" : `${p.w}${p.h}`}${p.r}${p.c}`)
+    .sort()
+    .join("|");
+
+// Breadth-first search from `start`: the shortest list of { id, dir } steps to a win,
+// [] if already won, or null if unsolvable.
+export const solve = (start) => {
+  if (isWon(start)) return [];
+  const seen = new Set([stateKey(start)]);
+  const queue = [{ pieces: start, parent: null, move: null }];
+  for (let i = 0; i < queue.length; i += 1) {
+    const node = queue[i];
+    for (const p of node.pieces) {
+      for (const dir of Object.keys(DIRS)) {
+        const pieces = movePiece(node.pieces, p.id, dir);
+        if (!pieces) continue;
+        const key = stateKey(pieces);
+        if (seen.has(key)) continue;
+        seen.add(key);
+        const next = { pieces, parent: node, move: { id: p.id, dir } };
+        if (isWon(pieces)) {
+          const path = [];
+          for (let n = next; n.parent; n = n.parent) path.unshift(n.move);
+          return path;
+        }
+        queue.push(next);
+      }
+    }
+  }
+  return null;
+};
