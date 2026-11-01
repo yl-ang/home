@@ -128,6 +128,15 @@ const Navigation = React.forwardRef((props, ref) => {
               <span className="nav-item lead">Patterns</span>
               <span className="nav-new-badge">new</span>
             </Nav.Link>
+            <Nav.Link
+              as={Link}
+              to="/whiteboard"
+              className={`nav-link-patterns${pathname === "/whiteboard" ? " is-active" : ""}`}
+              aria-current={pathname === "/whiteboard" ? "page" : undefined}
+            >
+              <span className="nav-item lead">Whiteboard</span>
+              <span className="nav-new-badge">new</span>
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

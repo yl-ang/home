@@ -24,6 +24,9 @@ import Klotski from "./components/klotski/Klotski";
 import Frogger from "./components/frogger/Frogger";
 import Patterns from "./components/patterns/Patterns";
 
+// Excalidraw is large; keep it out of the home page bundle.
+const Whiteboard = React.lazy(() => import("./components/whiteboard/Whiteboard"));
+
 const Home = React.forwardRef((props, ref) => {
   return (
     <>
@@ -69,6 +72,14 @@ const App = () => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:id" element={<BlogPost />} />
         <Route path="/patterns" element={<Patterns />} />
+        <Route
+          path="/whiteboard"
+          element={
+            <React.Suspense fallback={<div className="text-center text-white pt-5 mt-5">Loading whiteboard…</div>}>
+              <Whiteboard />
+            </React.Suspense>
+          }
+        />
       </Routes>
       <Footer>
         {getInTouch.show && <GetInTouch />}
