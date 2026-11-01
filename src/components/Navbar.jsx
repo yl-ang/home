@@ -5,12 +5,13 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { mainBody, projects, about } from "../editable-stuff/config.js";
 import { NavLink } from "./home/migration";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Navigation = React.forwardRef((props, ref) => {
   const [isTop, setIsTop] = useState(true);
   // Only the landing page has a dark hero; other routes are light from the start.
-  const isHome = useLocation().pathname === "/";
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
   const navbarMenuRef = useRef(null);
   const navbarDimensions = useResizeObserver(navbarMenuRef);
 
@@ -89,6 +90,14 @@ const Navigation = React.forwardRef((props, ref) => {
     .navbar.navbar-white .nav-link:focus {
       color: rgba(0,0,0,0.8) !important;
     }
+
+    /* Patterns link: "new" badge and active underline */
+    .navbar .nav-link-patterns { display: inline-flex; align-items: center; gap: .4rem; }
+    .navbar .nav-link-patterns.is-active .nav-item { border-bottom: 2px solid currentColor; }
+    .navbar .nav-new-badge {
+      font-size: .65rem; font-weight: 600; line-height: 1; padding: .2rem .4rem; border-radius: 999px;
+      background: #3b82f6; color: #fff !important; text-transform: lowercase;
+    }
   `;
 
   return (
@@ -110,6 +119,15 @@ const Navigation = React.forwardRef((props, ref) => {
             {about.show && (
                 <NavLink className="nav-item lead" href={process.env.PUBLIC_URL + "/#aboutme"}>About</NavLink>
             )}
+            <Nav.Link
+              as={Link}
+              to="/patterns"
+              className={`nav-link-patterns${pathname === "/patterns" ? " is-active" : ""}`}
+              aria-current={pathname === "/patterns" ? "page" : undefined}
+            >
+              <span className="nav-item lead">Patterns</span>
+              <span className="nav-new-badge">new</span>
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

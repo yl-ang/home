@@ -22,6 +22,7 @@ import SiteBackground from "./components/background/SiteBackground";
 import Minesweeper from "./components/minesweeper/Minesweeper";
 import Klotski from "./components/klotski/Klotski";
 import Frogger from "./components/frogger/Frogger";
+import Patterns from "./components/patterns/Patterns";
 
 const Home = React.forwardRef((props, ref) => {
   return (
@@ -67,6 +68,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:id" element={<BlogPost />} />
+        <Route path="/patterns" element={<Patterns />} />
       </Routes>
       <Footer>
         {getInTouch.show && <GetInTouch />}
