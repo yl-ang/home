@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdevelopers_portfolio=self.webpackChunkdevelopers_portfolio||[]).push([[5265],{5265:function(e,r,o){o.r(r),o.d(r,{TreemapModule:function(){return n.g},createTreemapServices:function(){return n.K}});var n=o(5899);o(1001)}}]);
