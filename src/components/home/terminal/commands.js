@@ -11,6 +11,7 @@ import {
 import bloglist from "../../../editable-stuff/blog";
 import { openMinesweeper } from "../../minesweeper/Minesweeper";
 import { openKlotski } from "../../klotski/Klotski";
+import { openFrogger } from "../../frogger/Frogger";
 
 const line = (text, kind, href) => ({ text, kind, href });
 const lines = (arr) => arr.map((t) => (typeof t === "string" ? line(t) : t));
@@ -157,6 +158,10 @@ const commands = {
     if (args[0] === "klotski") {
       openKlotski();
       return [line("[sudo] launching klotski.exe ...", "ok")];
+    }
+    if (args[0] === "frogger") {
+      openFrogger();
+      return [line("[sudo] launching frogger.exe ... why did the frog cross the road? to get to the root shell.", "ok")];
     }
     if (args[0] !== "minesweeper") {
       return [line(`guest is not in the sudoers file. This incident will be reported.`, "error")];

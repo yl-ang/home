@@ -21,6 +21,7 @@ import Leadership from "./components/home/Leadership.jsx";
 import SiteBackground from "./components/background/SiteBackground";
 import Minesweeper from "./components/minesweeper/Minesweeper";
 import Klotski from "./components/klotski/Klotski";
+import Frogger from "./components/frogger/Frogger";
 
 const Home = React.forwardRef((props, ref) => {
   return (
@@ -72,6 +73,7 @@ const App = () => {
       </Footer>
       <Minesweeper />
       <Klotski />
+      <Frogger />
     </BrowserRouter>
   );
 };
