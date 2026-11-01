@@ -10,6 +10,7 @@ import {
 } from "../../../editable-stuff/config";
 import bloglist from "../../../editable-stuff/blog";
 import { openMinesweeper } from "../../minesweeper/Minesweeper";
+import { openKlotski } from "../../klotski/Klotski";
 
 const line = (text, kind, href) => ({ text, kind, href });
 const lines = (arr) => arr.map((t) => (typeof t === "string" ? line(t) : t));
@@ -131,6 +132,7 @@ const commands = {
         return [
           line("nice, you found it. you would make a good pentester.", "warn"),
           line("psst: ↑ ↑ ↓ ↓ ← → ← → B A", "muted"),
+          line("psst: a warlord is boxed in by his own generals. try: sudo klotski", "muted"),
         ];
       case "projects":
       case "experience":
@@ -152,6 +154,10 @@ const commands = {
   echo: (args) => [line(args.join(" "))],
   // Hidden: not in help, ls or Tab completion.
   sudo: (args) => {
+    if (args[0] === "klotski") {
+      openKlotski();
+      return [line("[sudo] launching klotski.exe ...", "ok")];
+    }
     if (args[0] !== "minesweeper") {
       return [line(`guest is not in the sudoers file. This incident will be reported.`, "error")];
     }

@@ -1,0 +1,190 @@
+.kl-backdrop {
+  --kl-navy: #05070f;
+  --kl-panel: #0b1324;
+  --kl-border: #1a2a45;
+  --kl-text: #f2f5fa;
+  --kl-muted: #a9b9d0;
+  --kl-blue: #5aa9ff;
+  --kl-cyan: #4dd2ff;
+  --kl-amber: #ffc857;
+  --kl-gap: 6px;
+  --kl-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: rgba(2, 4, 10, 0.72);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  font-family: var(--kl-mono);
+  animation: kl-fade 0.18s ease-out;
+}
+@media (min-width: 480px) {
+  .kl-backdrop { padding: 16px; }
+}
+
+.kl-window {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  border-radius: 14px;
+  overflow: hidden;
+  color: var(--kl-text);
+  background: var(--kl-navy);
+  border: 1px solid var(--kl-border);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 48px rgba(90, 169, 255, 0.12);
+  animation: kl-pop 0.22s ease-out;
+}
+
+.kl-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  background: var(--kl-panel);
+  border-bottom: 1px solid var(--kl-border);
+}
+.kl-dots { display: flex; gap: 8px; }
+.kl-dot { width: 12px; height: 12px; border-radius: 50%; }
+.kl-dot--red { background: #ff5f57; }
+.kl-dot--yellow { background: #febc2e; }
+.kl-dot--green { background: #28c840; }
+.kl-title { flex: 1; margin: 0; font: 400 0.9rem var(--kl-mono); color: var(--kl-muted); }
+.kl-close {
+  width: 44px; height: 36px;
+  margin: -6px -8px -6px 0;
+  display: grid; place-items: center;
+  border: 0; border-radius: 8px;
+  background: transparent; color: var(--kl-muted);
+  font: 400 1rem var(--kl-mono);
+  cursor: pointer;
+}
+.kl-close:hover { color: var(--kl-text); }
+
+.kl-body { padding: 14px 10px 12px; }
+@media (min-width: 480px) {
+  .kl-body { padding: 18px 20px 14px; }
+}
+
+.kl-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding: 0 4px;
+}
+.kl-stats { color: var(--kl-cyan); font-weight: 700; font-size: 1rem; white-space: nowrap; }
+
+.kl-btn {
+  min-height: 44px;
+  padding: 0 16px;
+  white-space: nowrap;
+  border-radius: 10px;
+  border: 1px solid var(--kl-border);
+  background: var(--kl-panel);
+  color: var(--kl-cyan);
+  font: 700 0.9rem var(--kl-mono);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+.kl-btn:hover { border-color: var(--kl-cyan); }
+.kl-btn[aria-disabled="true"] { color: var(--kl-muted); opacity: 0.45; cursor: default; }
+.kl-btn[aria-disabled="true"]:hover { border-color: var(--kl-border); }
+
+/* 4 x 5 cells; shrinks on short screens so the whole puzzle stays in view. */
+.kl-board {
+  position: relative;
+  width: min(100%, 340px, max(220px, calc((100vh - 340px) * 0.8)));
+  width: min(100%, 340px, max(220px, calc((100dvh - 340px) * 0.8)));
+  aspect-ratio: 4 / 5;
+  margin: 0 auto 26px;
+  border-radius: 10px;
+  background: rgba(11, 19, 36, 0.6);
+  box-shadow: 0 0 0 2px var(--kl-border);
+}
+
+.kl-slots {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template: repeat(5, 1fr) / repeat(4, 1fr);
+}
+.kl-slot {
+  margin: calc(var(--kl-gap) / 2);
+  border-radius: 8px;
+  background: var(--kl-navy);
+}
+
+.kl-piece {
+  position: absolute;
+  left: calc(var(--c) * 25% + var(--kl-gap) / 2);
+  top: calc(var(--r) * 20% + var(--kl-gap) / 2);
+  width: calc(var(--w) * 25% - var(--kl-gap));
+  height: calc(var(--h) * 20% - var(--kl-gap));
+  padding: 0;
+  display: grid; place-items: center;
+  border-radius: 8px;
+  border: 1px solid var(--kl-blue);
+  background: #12233f;
+  color: var(--kl-text);
+  font: 700 1.4rem var(--kl-mono);
+  line-height: 1;
+  cursor: grab;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: left 0.12s ease-out, top 0.12s ease-out, border-color 0.12s, box-shadow 0.12s;
+}
+.kl-piece--1 { background: var(--kl-panel); border-color: var(--kl-border); color: var(--kl-muted); font-size: 1.15rem; }
+.kl-piece--cao { background: rgba(255, 200, 87, 0.22); border-color: var(--kl-amber); color: var(--kl-amber); font-size: 2.4rem; }
+.kl-piece.is-selected { border-color: var(--kl-cyan); box-shadow: 0 0 0 2px var(--kl-cyan), 0 0 16px rgba(77, 210, 255, 0.5); z-index: 1; }
+.kl-piece.is-win { background: rgba(255, 200, 87, 0.5); box-shadow: 0 0 0 2px var(--kl-amber), 0 0 24px rgba(255, 200, 87, 0.7); }
+.kl-piece:focus { outline: none; }
+.kl-piece:focus-visible { box-shadow: 0 0 0 2px var(--kl-blue), 0 0 14px rgba(90, 169, 255, 0.5); }
+.kl-piece.is-selected:focus-visible { box-shadow: 0 0 0 2px var(--kl-cyan), 0 0 0 5px var(--kl-blue); }
+
+/* Bottom-centre gap in the frame, two cells wide. */
+.kl-exit {
+  position: absolute;
+  left: 25%;
+  width: 50%;
+  bottom: -2px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--kl-cyan);
+  box-shadow: 0 0 10px rgba(77, 210, 255, 0.7);
+}
+.kl-exit span {
+  position: absolute;
+  top: 8px; left: 0; right: 0;
+  text-align: center;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--kl-cyan);
+}
+
+.kl-pad { display: flex; gap: 10px; max-width: 340px; margin: 0 auto; }
+.kl-btn--pad { flex: 1; padding: 0; font-size: 1.2rem; }
+
+.kl-btn:focus-visible, .kl-close:focus-visible { outline: 2px solid var(--kl-blue); outline-offset: 2px; }
+
+.kl-status { min-height: 1.5em; margin: 14px 0 0; text-align: center; font-weight: 700; font-size: 0.9rem; color: var(--kl-muted); }
+.kl-status.is-win { color: var(--kl-cyan); }
+.kl-hint { margin: 10px 0 0; text-align: center; font-size: 0.72rem; line-height: 1.5; color: var(--kl-muted); }
+
+@keyframes kl-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes kl-pop { from { opacity: 0; transform: translateY(8px) scale(0.98); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .kl-backdrop, .kl-window { animation: none; }
+  .kl-btn, .kl-piece { transition: none; }
+}

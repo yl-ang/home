@@ -20,6 +20,7 @@ import GetInTouch from "./components/home/GetInTouch.jsx";
 import Leadership from "./components/home/Leadership.jsx";
 import SiteBackground from "./components/background/SiteBackground";
 import Minesweeper from "./components/minesweeper/Minesweeper";
+import Klotski from "./components/klotski/Klotski";
 
 const Home = React.forwardRef((props, ref) => {
   return (
@@ -70,6 +71,7 @@ const App = () => {
         {getInTouch.show && <GetInTouch />}
       </Footer>
       <Minesweeper />
+      <Klotski />
     </BrowserRouter>
   );
 };
