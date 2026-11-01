@@ -1,6 +1,6 @@
 {
   "name": "developers-portfolio",
-  "description": "A personal static website/portfolio template hosted with GitHub Pages, built to showcase my recent projects.",
+  "description": "Personal portfolio of Ang Yong Liang, hosted on GitHub Pages.",
   "homepage": "https://yl-ang.github.io/home",
   "version": "2.0.0",
   "dependencies": {

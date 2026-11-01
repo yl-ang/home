@@ -5,7 +5,7 @@
 
   <p align="center">
     It is a personal static website/portfolio template hosted with GitHub Pages, built to showcase my recent projects. Site URL / Demo: 
-    <a href="https://hashirshoaeb.github.io/home">hashirshoaeb.github.io/home</a>
+    <a href="https://yl-ang.github.io/home">yl-ang.github.io/home</a>
     <br />
     <br />
     <a href="https://hashirshoaeb.github.io">About Me</a>
@@ -21,7 +21,7 @@
 [![Node Version](https://img.shields.io/static/v1?label=Node&message=v18.13.0&color=026e00&style=for-the-badge)](https://nodejs.org)
 [![npm Version](https://img.shields.io/static/v1?label=npm&message=8.11.0&color=cb0000&style=for-the-badge)](https://nodejs.org)
 
-[![Site preview](/public/social-image.png)](https://hashirshoaeb.github.io/home)
+[![Site preview](/public/social-image-v2.png)](https://yl-ang.github.io/home)
 
 ## Table of Contents
 
@@ -122,9 +122,9 @@ You should have [Node.js](https://nodejs.org/en/) and [Git](https://git-scm.com/
 10. To change the thumbnail image:
 
     - Navigate to the "public" folder.  
-    - There you will see "social-image.png".  
+    - There you will see "social-image-v2.png".  
     - Delete it.   
-    - Take a screenshot of your version and rename it "social-image.png" and place it there.  
+    - Regenerate it with `node scripts/generate-social-image.mjs`, or take a screenshot and rename it "social-image-v2.png" and place it there.  
     
    Next time if you make changes, repeat from step 8.
 
