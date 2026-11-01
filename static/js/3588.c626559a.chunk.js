@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdevelopers_portfolio=self.webpackChunkdevelopers_portfolio||[]).push([[3588],{3588:function(e,r,o){o.r(r),o.d(r,{WardleyModule:function(){return n.a},createWardleyServices:function(){return n.L}});var n=o(2946);o(1001)}}]);

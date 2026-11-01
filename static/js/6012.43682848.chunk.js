@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdevelopers_portfolio=self.webpackChunkdevelopers_portfolio||[]).push([[6012],{6012:function(e,r,o){o.r(r),o.d(r,{PacketModule:function(){return t.$},createPacketServices:function(){return t.g}});var t=o(8310);o(4642)}}]);
