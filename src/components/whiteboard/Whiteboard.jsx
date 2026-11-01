@@ -12,6 +12,7 @@ import { BLANK, BLANK_ID, TEMPLATE_OPTIONS } from "./templates";
 import "./Whiteboard.css";
 
 const STORAGE_KEY = "wb-blank-scene-v1";
+const NOTES_KEY = "wb-notes-v1";
 const DEFAULT_TEMPLATE = "url-shortener";
 const SAVE_DELAY_MS = 500;
 const UI_OPTIONS = {
@@ -56,6 +57,24 @@ const writeBlank = (elements, appState) => {
   }
 };
 
+const readNotes = () => {
+  try {
+    const saved = JSON.parse(localStorage.getItem(NOTES_KEY));
+    if (saved && typeof saved === "object") return saved;
+  } catch (e) {
+    // Storage unavailable or corrupt: start with no notes.
+  }
+  return {};
+};
+
+const writeNotes = (notes) => {
+  try {
+    localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
+  } catch (e) {
+    // Quota or privacy mode: notes just won't persist.
+  }
+};
+
 const download = (blob, filename) => {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
@@ -72,11 +91,15 @@ const Whiteboard = () => {
   const [templateId, setTemplateId] = useState(DEFAULT_TEMPLATE);
   const [backup, setBackup] = useState(null);
   const [status, setStatus] = useState("");
+  const [large, setLarge] = useState(false);
+  const [notes, setNotes] = useState(readNotes);
 
   const templateRef = useRef(DEFAULT_TEMPLATE);
   const loadedSig = useRef("");
   const pendingSave = useRef(null);
   const saveTimer = useRef(null);
+  const notesTimer = useRef(null);
+  const notesRef = useRef(notes);
 
   const template = byId(templateId);
 
@@ -127,7 +150,45 @@ const Whiteboard = () => {
     if (api) loadTemplate(DEFAULT_TEMPLATE);
   }, [api, loadTemplate]);
 
-  useEffect(() => () => clearTimeout(saveTimer.current), []);
+  useEffect(
+    () => () => {
+      clearTimeout(saveTimer.current);
+      clearTimeout(notesTimer.current);
+      writeNotes(notesRef.current);
+    },
+    []
+  );
+
+  // Large mode: lock page scroll, close on Escape, and refit once the canvas has resized.
+  useEffect(() => {
+    if (!large) return undefined;
+    const onKey = (e) => e.key === "Escape" && setLarge(false);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [large]);
+
+  useEffect(() => {
+    if (!api) return undefined;
+    const t = setTimeout(() => {
+      if (api.getSceneElements().length > 0) {
+        api.scrollToContent(api.getSceneElements(), { fitToViewport: true, viewportZoomFactor: 0.74 });
+      }
+    }, 150);
+    return () => clearTimeout(t);
+  }, [api, large]);
+
+  const handleNotes = (e) => {
+    const next = { ...notesRef.current, [templateId]: e.target.value };
+    notesRef.current = next;
+    setNotes(next);
+    clearTimeout(notesTimer.current);
+    notesTimer.current = setTimeout(() => writeNotes(next), SAVE_DELAY_MS);
+  };
 
   const handleChange = useCallback(
     (elements, appState) => {
@@ -221,10 +282,26 @@ const Whiteboard = () => {
           </div>
         )}
 
-        <div className="wb-card">
+        <div className={`wb-card${large ? " is-large" : ""}`}>
           <div className="wb-card__head">
             <span className="wb-dot wb-dot--r" /><span className="wb-dot wb-dot--y" /><span className="wb-dot wb-dot--g" />
             <span className="wb-card__path">{`~/whiteboard/${template.id}`}</span>
+            <button
+              type="button"
+              className="wb-card__size"
+              onClick={() => setLarge((v) => !v)}
+              aria-pressed={large}
+              aria-label={large ? "Close large mode" : "Open in large mode"}
+              title={large ? "Close large mode (Esc)" : "Open in large mode"}
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                {large ? (
+                  <path d="M14 10l7-7M15 3v7h7M10 14l-7 7M9 21v-7H2" />
+                ) : (
+                  <path d="M14 10l7-7M15 3h6v6M10 14l-7 7M9 21H3v-6" />
+                )}
+              </svg>
+            </button>
           </div>
           <div className="wb-canvas">
             <Excalidraw
@@ -261,6 +338,22 @@ const Whiteboard = () => {
             </ul>
           </section>
         </div>
+
+        <section className="wb-panel wb-notes" aria-labelledby="wb-notes-title">
+          <h2 id="wb-notes-title" className="wb-panel__tag">NOTES</h2>
+          <label htmlFor="wb-notes-text" className="wb-notes__label">
+            {`Your notes for ${template.id === BLANK_ID ? "the blank canvas" : template.title}`}
+          </label>
+          <textarea
+            id="wb-notes-text"
+            className="wb-notes__text"
+            rows={6}
+            value={notes[templateId] || ""}
+            onChange={handleNotes}
+            placeholder="Requirements, assumptions, capacity estimates, trade-offs to mention..."
+          />
+          <p className="wb-notes__hint">Saved in this browser, separately for each diagram.</p>
+        </section>
       </div>
     </main>
   );
