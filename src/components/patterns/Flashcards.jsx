@@ -25,22 +25,82 @@ const getStorage = () => {
 const isTyping = (el) =>
   !!el && (/^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName) || el.isContentEditable);
 
-const Code = ({ code }) => (
-  <pre className="pt-code" tabIndex={0} aria-label="Python template">
-    <code>
-      {code.split("\n").map((line, i) => (
-        <span className="pt-code__line" key={i}>
-          {tokenizeLine(line).map((tok, j) => (
-            <span key={j} className={tok.type === "txt" ? undefined : `pt-tok--${tok.type}`}>
-              {tok.text}
+const copyText = async (text) => {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch (e) {
+    // Clipboard API unavailable (insecure context, denied): fall back to a hidden textarea.
+    try {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      return ok;
+    } catch (err) {
+      return false;
+    }
+  }
+};
+
+const Code = ({ code }) => {
+  const [state, setState] = useState("idle"); // idle | copied | failed
+
+  useEffect(() => {
+    if (state === "idle") return undefined;
+    const t = setTimeout(() => setState("idle"), 1600);
+    return () => clearTimeout(t);
+  }, [state]);
+
+  const copy = async () => setState((await copyText(code)) ? "copied" : "failed");
+
+  return (
+    <div className="pt-codewrap">
+      <button
+        type="button"
+        className={`pt-copy pt-copy--${state}`}
+        onClick={copy}
+        aria-label="Copy code"
+        title={state === "copied" ? "Copied" : state === "failed" ? "Copy failed" : "Copy code"}
+      >
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          {state === "copied" ? (
+            <path d="M5 13l4 4L19 7" />
+          ) : state === "failed" ? (
+            <path d="M6 6l12 12M18 6L6 18" />
+          ) : (
+            <>
+              <rect x="8" y="3" width="8" height="4" rx="1" />
+              <path d="M16 5h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2" />
+            </>
+          )}
+        </svg>
+      </button>
+      <span className="pt-sr" role="status">
+        {state === "copied" ? "Code copied to clipboard" : state === "failed" ? "Copy failed" : ""}
+      </span>
+      <pre className="pt-code" tabIndex={0} aria-label="Python template">
+        <code>
+          {code.split("\n").map((line, i) => (
+            <span className="pt-code__line" key={i}>
+              {tokenizeLine(line).map((tok, j) => (
+                <span key={j} className={tok.type === "txt" ? undefined : `pt-tok--${tok.type}`}>
+                  {tok.text}
+                </span>
+              ))}
+              {"\n"}
             </span>
           ))}
-          {"\n"}
-        </span>
-      ))}
-    </code>
-  </pre>
-);
+        </code>
+      </pre>
+    </div>
+  );
+};
 
 const Flashcards = ({ jump }) => {
   const [saved] = useState(() => {
@@ -234,7 +294,7 @@ const Flashcards = ({ jump }) => {
                   </div>
                   <div className="pt-back__code" onClick={(e) => e.stopPropagation()}>
                     <p className="pt-h">PYTHON TEMPLATE</p>
-                    <Code code={card.code} />
+                    <Code key={card.id} code={card.code} />
                   </div>
                 </div>
                 <p className="pt-h">

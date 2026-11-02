@@ -101,6 +101,17 @@
 .pt-back__p { color: #e2e8f0; line-height: 1.55; margin: 0; }
 .pt-cx { display: inline-block; margin: 1.25rem 0 0; padding: .4rem .9rem; border-radius: 10px; font-family: var(--pt-mono); font-size: .9rem; color: var(--pt-amber); background: rgba(255, 200, 87, .1); }
 
+.pt-codewrap { position: relative; }
+.pt-copy {
+  position: absolute; top: .5rem; right: .5rem; z-index: 1;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2rem; height: 2rem; padding: 0; border-radius: 8px; cursor: pointer;
+  color: var(--pt-muted); background: rgba(11, 19, 36, .9); border: 1px solid var(--pt-border);
+}
+.pt-copy:hover { color: #fff; border-color: var(--pt-blue); }
+.pt-copy--copied { color: var(--pt-green); border-color: rgba(94, 224, 138, .5); }
+.pt-copy--failed { color: #ff7b7b; border-color: rgba(255, 123, 123, .5); }
+.pt-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .pt-code {
   margin: 0; padding: 1rem 1.1rem; border-radius: 12px; overflow-x: auto; max-width: 100%;
   background: #060b17; border: 1px solid var(--pt-border);
