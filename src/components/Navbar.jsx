@@ -3,15 +3,14 @@ import { useScrollPosition } from "../hooks/useScrollPosition";
 import useResizeObserver from "../hooks/useResizeObserver";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import { mainBody, projects, about } from "../editable-stuff/config.js";
-import { NavLink } from "./home/migration";
+import { mainBody } from "../editable-stuff/config.js";
 import { Link, useLocation } from "react-router-dom";
 
 const Navigation = React.forwardRef((props, ref) => {
   const [isTop, setIsTop] = useState(true);
-  // Only the landing page has a dark hero; other routes are light from the start.
+  // Routes that open on a dark hero get a transparent bar until scrolled; others are light from the start.
   const { pathname } = useLocation();
-  const isHome = pathname === "/";
+  const hasDarkHero = ["/", "/patterns", "/whiteboard"].includes(pathname);
   const navbarMenuRef = useRef(null);
   const navbarDimensions = useResizeObserver(navbarMenuRef);
 
@@ -41,7 +40,7 @@ const Navigation = React.forwardRef((props, ref) => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [navbarDimensions]);
+  }, [navbarDimensions, pathname]);
 
   const navbarCss = `
     /* Default fallbacks */
@@ -103,7 +102,7 @@ const Navigation = React.forwardRef((props, ref) => {
   return (
       <Navbar
           ref={navbarMenuRef}
-          className={`px-3 fixed-top ${isTop && isHome ? "navbar-transparent" : "navbar-white"}`}
+          className={`px-3 fixed-top ${isTop && hasDarkHero ? "navbar-transparent" : "navbar-white"}`}
           expand="lg"
       >
         <style>{navbarCss}</style>
@@ -113,12 +112,6 @@ const Navigation = React.forwardRef((props, ref) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="toggler" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="navbar-nav mr-auto">
-            {projects.show && (
-                <NavLink href={process.env.PUBLIC_URL + "/#projects"}>Projects</NavLink>
-            )}
-            {about.show && (
-                <NavLink className="nav-item lead" href={process.env.PUBLIC_URL + "/#aboutme"}>About</NavLink>
-            )}
             <Nav.Link
               as={Link}
               to="/patterns"
