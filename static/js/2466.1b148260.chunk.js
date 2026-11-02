@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdevelopers_portfolio=self.webpackChunkdevelopers_portfolio||[]).push([[2466],{2466:function(e,r,t){t.r(r),t.d(r,{ArchitectureModule:function(){return c.s},createArchitectureServices:function(){return c.i}});var c=t(4335);t(4642)}}]);

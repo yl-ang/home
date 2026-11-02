@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdevelopers_portfolio=self.webpackChunkdevelopers_portfolio||[]).push([[390],{390:function(e,r,o){o.r(r),o.d(r,{PieModule:function(){return n.F},createPieServices:function(){return n.l}});var n=o(1059);o(4642)}}]);
