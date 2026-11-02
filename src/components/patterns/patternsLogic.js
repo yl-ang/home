@@ -77,18 +77,20 @@ const KEYWORDS = new Set([
   "pass", "yield", "with", "as", "nonlocal", "global", "try", "except", "del",
 ]);
 
-// Splits one line of Python into [{type, text}] with type: kw | num | com | txt.
+// Splits one line of Python into [{type, text}] with type: kw | num | com | txt (strings stay txt).
 export const tokenizeLine = (line) => {
   const tokens = [];
-  const re = /(#.*$)|(\b\d+\b)|([A-Za-z_]\w*)/g;
+  // Strings are matched first so a "#" inside one is not read as a comment.
+  const re = /("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')|(#.*$)|(\b\d+\b)|([A-Za-z_]\w*)/g;
   let last = 0;
   let m;
   const push = (type, text) => text && tokens.push({ type, text });
   while ((m = re.exec(line))) {
     push("txt", line.slice(last, m.index));
-    if (m[1]) push("com", m[1]);
-    else if (m[2]) push("num", m[2]);
-    else push(KEYWORDS.has(m[3]) ? "kw" : "txt", m[3]);
+    if (m[1]) push("txt", m[1]);
+    else if (m[2]) push("com", m[2]);
+    else if (m[3]) push("num", m[3]);
+    else push(KEYWORDS.has(m[4]) ? "kw" : "txt", m[4]);
     last = m.index + m[0].length;
   }
   push("txt", line.slice(last));

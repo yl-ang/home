@@ -200,7 +200,7 @@ const Flashcards = ({ jump }) => {
                   {cardStatus === "known" ? "known" : "review"}
                 </span>
               )}
-              <span className="pt-card__topic">{card.topic}</span>
+              <span className="pt-card__topic">{card.tag}</span>
             </div>
 
             {!flipped ? (
@@ -237,7 +237,9 @@ const Flashcards = ({ jump }) => {
                     <Code code={card.code} />
                   </div>
                 </div>
-                <p className="pt-h">PRACTISE (NEETCODE 250)</p>
+                <p className="pt-h">
+                  {card.topic === "Bonus" ? "PRACTISE (NEETCODE + RELATED)" : "PRACTISE (NEETCODE 250)"}
+                </p>
                 <div className="pt-chips">
                   {card.problems.map((p) => (
                     <span key={p} className="pt-chip">

@@ -18,13 +18,15 @@ export const TOPICS = [
   "Greedy",
   "Intervals",
   "Math & Geometry",
-  "Bit Manipulation"
+  "Bit Manipulation",
+  "Bonus"
 ];
 
 export const PATTERNS = [
   {
     "id": 1,
     "topic": "Arrays & Hashing",
+    "tag": "Arrays & Hashing",
     "name": "Hash Set Lookup",
     "whenToUse": "You need O(1) “have I seen this?” checks: duplicates, membership, runs of numbers.",
     "keyIdea": "Put everything in a set. For runs, only start counting from a number with no predecessor.",
@@ -40,6 +42,7 @@ export const PATTERNS = [
   {
     "id": 2,
     "topic": "Arrays & Hashing",
+    "tag": "Arrays & Hashing",
     "name": "Complement Hash Map",
     "whenToUse": "Find a pair, or any element whose partner was seen earlier in the scan.",
     "keyIdea": "For each x, look up target − x in a map of value to index, then store x. One pass.",
@@ -54,6 +57,7 @@ export const PATTERNS = [
   {
     "id": 3,
     "topic": "Arrays & Hashing",
+    "tag": "Arrays & Hashing",
     "name": "Frequency Counting",
     "whenToUse": "Anagrams, character budgets, majority element, “same multiset” questions.",
     "keyIdea": "Count with Counter or a 26-slot array. Use the count tuple as a dictionary key to group equals.",
@@ -69,6 +73,7 @@ export const PATTERNS = [
   {
     "id": 4,
     "topic": "Arrays & Hashing",
+    "tag": "Arrays & Hashing",
     "name": "Bucket Sort for Top-K",
     "whenToUse": "Top K by frequency, or values in a small known range where counting beats sorting.",
     "keyIdea": "A frequency never exceeds n, so index buckets by count and sweep from the top. No log factor.",
@@ -84,6 +89,7 @@ export const PATTERNS = [
   {
     "id": 5,
     "topic": "Arrays & Hashing",
+    "tag": "Arrays & Hashing",
     "name": "Prefix Sum",
     "whenToUse": "Many range-sum queries, or counting subarrays whose sum hits a target.",
     "keyIdea": "Sum(i..j) = prefix[j] − prefix[i−1]. Count earlier prefixes equal to current − k in a map.",
@@ -99,6 +105,7 @@ export const PATTERNS = [
   {
     "id": 6,
     "topic": "Arrays & Hashing",
+    "tag": "Arrays & Hashing",
     "name": "Hash Design & Encoding",
     "whenToUse": "Design a structure with O(1) operations, or serialise data without ambiguity.",
     "keyIdea": "Length-prefix each string (4#abcd) so delimiters inside the data never break decoding.",
@@ -113,6 +120,7 @@ export const PATTERNS = [
   {
     "id": 7,
     "topic": "Two Pointers",
+    "tag": "Two Pointers",
     "name": "Opposite-Ends Pointers",
     "whenToUse": "Sorted input, palindromes, or pairs where shrinking from both ends keeps a valid answer.",
     "keyIdea": "Move the pointer that is the bottleneck (shorter bar, too-small sum). A discarded option is never revisited.",
@@ -128,6 +136,7 @@ export const PATTERNS = [
   {
     "id": 8,
     "topic": "Two Pointers",
+    "tag": "Two Pointers",
     "name": "Read & Write Pointers",
     "whenToUse": "Remove, dedupe or compact an array in place, keeping order, with O(1) extra space.",
     "keyIdea": "The read pointer scans everything. The write pointer marks the next slot for a kept element.",
@@ -142,6 +151,7 @@ export const PATTERNS = [
   {
     "id": 9,
     "topic": "Two Pointers",
+    "tag": "Two Pointers",
     "name": "Sort + K-Sum",
     "whenToUse": "Unique triplets or quadruplets that sum to a target.",
     "keyIdea": "Sort, fix one number, run two pointers on the rest. Skip equal neighbours to avoid duplicate answers.",
@@ -156,6 +166,7 @@ export const PATTERNS = [
   {
     "id": 10,
     "topic": "Two Pointers",
+    "tag": "Two Pointers",
     "name": "Merge Two Sequences",
     "whenToUse": "Combine or compare two sorted sequences, or check one is a subsequence of another.",
     "keyIdea": "One pointer per sequence. In place, fill from the largest end so unread values are never overwritten.",
@@ -170,6 +181,7 @@ export const PATTERNS = [
   {
     "id": 11,
     "topic": "Sliding Window",
+    "tag": "Sliding Window",
     "name": "Fixed-Size Window",
     "whenToUse": "The window length k is given: nearby duplicates, anagram of fixed length, k-sized averages.",
     "keyIdea": "Add the entering element, drop the leaving one, update the answer. O(1) per step.",
@@ -183,6 +195,7 @@ export const PATTERNS = [
   {
     "id": 12,
     "topic": "Sliding Window",
+    "tag": "Sliding Window",
     "name": "Variable Window: Longest Valid",
     "whenToUse": "Longest substring or subarray that satisfies a constraint such as no repeats or at most k changes.",
     "keyIdea": "Right always advances. Left advances only while the window is invalid. Each index moves once.",
@@ -197,6 +210,7 @@ export const PATTERNS = [
   {
     "id": 13,
     "topic": "Sliding Window",
+    "tag": "Sliding Window",
     "name": "Variable Window: Shortest Cover",
     "whenToUse": "Smallest window that meets a requirement: sum at least target, or covers every needed character.",
     "keyIdea": "Expand until valid, then shrink from the left while it stays valid, recording the minimum each time.",
@@ -210,6 +224,7 @@ export const PATTERNS = [
   {
     "id": 14,
     "topic": "Sliding Window",
+    "tag": "Sliding Window",
     "name": "Monotonic Deque",
     "whenToUse": "The maximum or minimum of every window of size k.",
     "keyIdea": "Keep indices in a deque with decreasing values. The front is the max. Pop expired indices from the front, smaller ones from the back.",
@@ -222,6 +237,7 @@ export const PATTERNS = [
   {
     "id": 15,
     "topic": "Stack",
+    "tag": "Stack",
     "name": "Stack: Matching & Evaluation",
     "whenToUse": "Nested or paired structures, undo operations, evaluating expressions, last-in-first-out processing.",
     "keyIdea": "Push openers and operands. On a closer or operator, pop and match or combine. Valid means the stack ends empty.",
@@ -237,6 +253,7 @@ export const PATTERNS = [
   {
     "id": 16,
     "topic": "Stack",
+    "tag": "Stack",
     "name": "Monotonic Stack",
     "whenToUse": "Next greater or smaller element, days until warmer, spans, largest rectangle in a histogram.",
     "keyIdea": "Keep a stack of indices with monotonic values. A new element pops everything it resolves, so each index is pushed and popped once.",
@@ -252,6 +269,7 @@ export const PATTERNS = [
   {
     "id": 17,
     "topic": "Binary Search",
+    "tag": "Binary Search",
     "name": "Classic Binary Search",
     "whenToUse": "Sorted data, or any monotonic yes/no boundary you can test in O(1).",
     "keyIdea": "Keep the invariant that the target lies in lo..hi. Halve the range and move past mid, never onto it.",
@@ -266,6 +284,7 @@ export const PATTERNS = [
   {
     "id": 18,
     "topic": "Binary Search",
+    "tag": "Binary Search",
     "name": "Binary Search on the Answer",
     "whenToUse": "“Minimum X such that it is feasible”, where larger X never makes feasibility worse.",
     "keyIdea": "Search the range of possible answers. Write feasible(x) and find the first x where it is true.",
@@ -280,6 +299,7 @@ export const PATTERNS = [
   {
     "id": 19,
     "topic": "Binary Search",
+    "tag": "Binary Search",
     "name": "Rotated Sorted Array",
     "whenToUse": "A sorted array rotated at an unknown pivot; find the minimum or a target.",
     "keyIdea": "One half is always sorted. Compare mid with hi to see where the pivot is, and discard the other half.",
@@ -293,6 +313,7 @@ export const PATTERNS = [
   {
     "id": 20,
     "topic": "Binary Search",
+    "tag": "Binary Search",
     "name": "Timeline & Partition Search",
     "whenToUse": "Latest value at or before a timestamp, or a median across two sorted arrays.",
     "keyIdea": "Bisect sorted timestamps. For medians, binary-search the cut in the smaller array so left halves stay ≤ right halves.",
@@ -306,6 +327,7 @@ export const PATTERNS = [
   {
     "id": 21,
     "topic": "Linked List",
+    "tag": "Linked List",
     "name": "Reverse a Linked List",
     "whenToUse": "Reverse all or part of a list, or flip pointers in place.",
     "keyIdea": "Walk with prev and cur: save next, point cur back, advance. For a sublist, reverse it then reconnect both ends.",
@@ -320,6 +342,7 @@ export const PATTERNS = [
   {
     "id": 22,
     "topic": "Linked List",
+    "tag": "Linked List",
     "name": "Fast & Slow Pointers",
     "whenToUse": "Cycle detection, finding the middle, the n-th node from the end, duplicate in an index-as-pointer array.",
     "keyIdea": "Slow moves 1, fast moves 2. They meet if there is a cycle. Fast at the end means slow is at the middle.",
@@ -335,6 +358,7 @@ export const PATTERNS = [
   {
     "id": 23,
     "topic": "Linked List",
+    "tag": "Linked List",
     "name": "Merge with a Dummy Head",
     "whenToUse": "Build a new list from one or more lists, or edit a list where the head might change.",
     "keyIdea": "A dummy node removes head special cases. Append the smaller head each step. For k lists, use a min-heap.",
@@ -349,6 +373,7 @@ export const PATTERNS = [
   {
     "id": 24,
     "topic": "Linked List",
+    "tag": "Linked List",
     "name": "Hash Map + Doubly Linked List",
     "whenToUse": "O(1) caches with eviction order (LRU), or copying a list with random pointers.",
     "keyIdea": "Map key to node for O(1) lookup. A doubly linked list gives O(1) move-to-front and evict-from-tail. OrderedDict does both.",
@@ -362,6 +387,7 @@ export const PATTERNS = [
   {
     "id": 25,
     "topic": "Trees",
+    "tag": "Trees",
     "name": "Tree DFS: Bottom-Up Recursion",
     "whenToUse": "Depth, balance, diameter, same tree, subtree: the answer is built from the children.",
     "keyIdea": "Decide what dfs(node) returns, combine left and right, and update a global best on the way up.",
@@ -379,6 +405,7 @@ export const PATTERNS = [
   {
     "id": 26,
     "topic": "Trees",
+    "tag": "Trees",
     "name": "BFS Level Order",
     "whenToUse": "Level-by-level output, right-side view, minimum depth, anything that depends on the level.",
     "keyIdea": "Use a queue. At the start of each level snapshot len(queue) and process exactly that many nodes.",
@@ -392,6 +419,7 @@ export const PATTERNS = [
   {
     "id": 27,
     "topic": "Trees",
+    "tag": "Trees",
     "name": "BST Property",
     "whenToUse": "Ordered trees: validate, search, insert, delete, k-th smallest, lowest common ancestor.",
     "keyIdea": "Left < node < right. Pass (low, high) bounds down. In-order traversal yields sorted values.",
@@ -408,6 +436,7 @@ export const PATTERNS = [
   {
     "id": 28,
     "topic": "Trees",
+    "tag": "Trees",
     "name": "Tree Construction",
     "whenToUse": "Rebuild a tree from traversals, or serialise and deserialise one.",
     "keyIdea": "Preorder gives the root first. Its position in inorder splits left and right. An index map makes each split O(1).",
@@ -421,6 +450,7 @@ export const PATTERNS = [
   {
     "id": 29,
     "topic": "Trees",
+    "tag": "Trees",
     "name": "Path Value DFS",
     "whenToUse": "Best path sums, good nodes, any value that accumulates along a root-to-node path.",
     "keyIdea": "Pass state down (max so far) or return gains up. Clamp negative gains to 0, and count a bend through the node in the global best.",
@@ -434,6 +464,7 @@ export const PATTERNS = [
   {
     "id": 30,
     "topic": "Tries",
+    "tag": "Tries",
     "name": "Trie (Prefix Tree)",
     "whenToUse": "Prefix search, autocomplete, dictionaries with wildcards, searching many words on a grid.",
     "keyIdea": "Each node maps a character to a child and has an end-of-word flag. A prefix lookup costs O(length).",
@@ -448,6 +479,7 @@ export const PATTERNS = [
   {
     "id": 31,
     "topic": "Heap",
+    "tag": "Heap",
     "name": "Top-K with a Heap",
     "whenToUse": "K largest, K smallest, K closest, or a stream where you only need the K-th element.",
     "keyIdea": "A min-heap capped at size K keeps the K largest. Its root is the K-th largest.",
@@ -463,6 +495,7 @@ export const PATTERNS = [
   {
     "id": 32,
     "topic": "Heap",
+    "tag": "Heap",
     "name": "Two Heaps",
     "whenToUse": "Running median, or any problem that splits data into a small half and a large half.",
     "keyIdea": "Max-heap for the lower half, min-heap for the upper half. Keep sizes within 1. The median sits at the tops.",
@@ -475,6 +508,7 @@ export const PATTERNS = [
   {
     "id": 33,
     "topic": "Heap",
+    "tag": "Heap",
     "name": "Heap + Greedy Scheduling",
     "whenToUse": "Always pick the most frequent, earliest or cheapest next item, with cooldowns or spacing rules.",
     "keyIdea": "Max-heap of remaining counts. Take the best each tick, park it in a cooldown queue, return it when ready.",
@@ -489,6 +523,7 @@ export const PATTERNS = [
   {
     "id": 34,
     "topic": "Backtracking",
+    "tag": "Backtracking",
     "name": "Subsets: Include or Exclude",
     "whenToUse": "Generate all subsets or combinations, or find ones that sum to a target.",
     "keyIdea": "At each index choose it or skip it. For duplicates, sort and skip equal siblings. For reuse, recurse on the same index.",
@@ -504,6 +539,7 @@ export const PATTERNS = [
   {
     "id": 35,
     "topic": "Backtracking",
+    "tag": "Backtracking",
     "name": "Permutations: Choice per Slot",
     "whenToUse": "Orderings, or strings built by choosing one option for each position.",
     "keyIdea": "Loop over unused choices, mark used, recurse, unmark. The path length is fixed, so the base case is len == n.",
@@ -518,6 +554,7 @@ export const PATTERNS = [
   {
     "id": 36,
     "topic": "Backtracking",
+    "tag": "Backtracking",
     "name": "Grid & Board Backtracking",
     "whenToUse": "Find a path on a grid without reusing cells, or place pieces under constraints (N-Queens).",
     "keyIdea": "Mark the cell, try four neighbours, unmark on return. For N-Queens track used columns and diagonals in sets.",
@@ -531,6 +568,7 @@ export const PATTERNS = [
   {
     "id": 37,
     "topic": "Backtracking",
+    "tag": "Backtracking",
     "name": "Partition Backtracking",
     "whenToUse": "Split a string or array into valid pieces, or assign items to buckets.",
     "keyIdea": "From index i try every end j. Recurse only when s[i:j] is valid. Sort and prune early for bucket problems.",
@@ -545,6 +583,7 @@ export const PATTERNS = [
   {
     "id": 38,
     "topic": "Graphs",
+    "tag": "Graphs",
     "name": "Grid DFS (Flood Fill)",
     "whenToUse": "Connected regions on a grid: islands, area, enclosed regions, water flow.",
     "keyIdea": "Sink visited cells while recursing in four directions. Count DFS starts. For border problems, start from the edges.",
@@ -561,6 +600,7 @@ export const PATTERNS = [
   {
     "id": 39,
     "topic": "Graphs",
+    "tag": "Graphs",
     "name": "Multi-Source BFS",
     "whenToUse": "Shortest distance from many sources at once, or anything that spreads in rounds (rot, fire, gates).",
     "keyIdea": "Seed the queue with every source at distance 0, then expand level by level. The first visit is the shortest.",
@@ -575,6 +615,7 @@ export const PATTERNS = [
   {
     "id": 40,
     "topic": "Graphs",
+    "tag": "Graphs",
     "name": "Topological Sort",
     "whenToUse": "Prerequisites, build order, derived orderings, or detecting a cycle in a directed graph.",
     "keyIdea": "Kahn’s algorithm: start from in-degree 0, pop, decrement neighbours. If fewer than n nodes come out, there is a cycle.",
@@ -589,6 +630,7 @@ export const PATTERNS = [
   {
     "id": 41,
     "topic": "Graphs",
+    "tag": "Graphs",
     "name": "Union-Find",
     "whenToUse": "Dynamic connectivity, grouping, counting components, spotting the edge that closes a cycle.",
     "keyIdea": "Find with path compression, union by size. If both endpoints share a root, that edge is redundant.",
@@ -603,6 +645,7 @@ export const PATTERNS = [
   {
     "id": 42,
     "topic": "Graphs",
+    "tag": "Graphs",
     "name": "Implicit-Graph BFS",
     "whenToUse": "States are the nodes (words, lock codes) and you need the fewest transformations. Also graph cloning.",
     "keyIdea": "BFS over states, generating neighbours on the fly. A visited set stops loops. To clone, map old node to new node.",
@@ -616,6 +659,7 @@ export const PATTERNS = [
   {
     "id": 43,
     "topic": "Advanced Graphs",
+    "tag": "Advanced Graphs",
     "name": "Dijkstra",
     "whenToUse": "Shortest path with non-negative weights, or minimising the worst edge along a path.",
     "keyIdea": "Min-heap of (distance, node). Skip stale pops, finalise on first pop, relax neighbours. For “min effort” push max(cur, edge).",
@@ -630,6 +674,7 @@ export const PATTERNS = [
   {
     "id": 44,
     "topic": "Advanced Graphs",
+    "tag": "Advanced Graphs",
     "name": "Bellman-Ford (At Most K Edges)",
     "whenToUse": "Negative edges, or a cap on the number of edges or stops in the path.",
     "keyIdea": "Relax every edge k+1 times, always reading from a copy of the previous round so a path never gains an extra hop.",
@@ -642,6 +687,7 @@ export const PATTERNS = [
   {
     "id": 45,
     "topic": "Advanced Graphs",
+    "tag": "Advanced Graphs",
     "name": "Minimum Spanning Tree",
     "whenToUse": "Connect every node at minimum total cost.",
     "keyIdea": "Prim: grow one tree, always taking the cheapest edge that leaves it. Kruskal: sort edges and add each one that union-find accepts.",
@@ -655,6 +701,7 @@ export const PATTERNS = [
   {
     "id": 46,
     "topic": "1D Dynamic Programming",
+    "tag": "1D Dynamic Programming",
     "name": "Linear DP",
     "whenToUse": "Choices along a line where dp[i] depends on a few earlier states: stairs, rob or skip, decode, break words.",
     "keyIdea": "Define dp[i], write the recurrence, then keep only the last one or two values for O(1) space.",
@@ -672,6 +719,7 @@ export const PATTERNS = [
   {
     "id": 47,
     "topic": "1D Dynamic Programming",
+    "tag": "1D Dynamic Programming",
     "name": "Unbounded Knapsack",
     "whenToUse": "Unlimited use of each item to reach an amount: fewest coins, number of ways, perfect squares.",
     "keyIdea": "dp[a] = best over each item. Iterate amounts upward so an item can be reused. To count ways, loop items on the outside.",
@@ -686,6 +734,7 @@ export const PATTERNS = [
   {
     "id": 48,
     "topic": "1D Dynamic Programming",
+    "tag": "1D Dynamic Programming",
     "name": "0/1 Knapsack",
     "whenToUse": "Each item used at most once: subset sum, equal partition, target sum.",
     "keyIdea": "dp[s] means sum s is reachable. Iterate the capacity downward so an item cannot be counted twice.",
@@ -700,6 +749,7 @@ export const PATTERNS = [
   {
     "id": 49,
     "topic": "2D Dynamic Programming",
+    "tag": "2D Dynamic Programming",
     "name": "Grid DP",
     "whenToUse": "Count paths or minimise cost through a grid moving right and down.",
     "keyIdea": "dp[r][c] comes from the top and left cells. Roll a single row for O(C) space. If moves go any direction, use memoised DFS.",
@@ -715,6 +765,7 @@ export const PATTERNS = [
   {
     "id": 50,
     "topic": "2D Dynamic Programming",
+    "tag": "2D Dynamic Programming",
     "name": "Two-String DP",
     "whenToUse": "Compare two strings or sequences: longest common subsequence, edit distance, interleaving, matching.",
     "keyIdea": "dp[i][j] covers prefixes a[:i] and b[:j]. On a match, take the diagonal. Otherwise take the best of dropping one side.",
@@ -731,6 +782,7 @@ export const PATTERNS = [
   {
     "id": 51,
     "topic": "Greedy",
+    "tag": "Greedy",
     "name": "Kadane’s Algorithm",
     "whenToUse": "Best contiguous subarray by sum or product.",
     "keyIdea": "At each x, either extend the running subarray or restart at x. For products track both the max and the min, since a negative flips them.",
@@ -744,6 +796,7 @@ export const PATTERNS = [
   {
     "id": 52,
     "topic": "Greedy",
+    "tag": "Greedy",
     "name": "Greedy Reach & Feasibility",
     "whenToUse": "A local choice is provably safe: farthest jump, gas surplus, partition labels, grouping cards.",
     "keyIdea": "Track the farthest reach or running surplus. If you fall behind, the answer is false, or restart from the next index.",
@@ -762,6 +815,7 @@ export const PATTERNS = [
   {
     "id": 53,
     "topic": "Intervals",
+    "tag": "Intervals",
     "name": "Sort & Merge Intervals",
     "whenToUse": "Overlaps, merges, insertions, scheduling, minimum meeting rooms.",
     "keyIdea": "Sort by start, then compare each interval with the last merged end. To count overlaps, use a min-heap of end times.",
@@ -778,6 +832,7 @@ export const PATTERNS = [
   {
     "id": 54,
     "topic": "Math & Geometry",
+    "tag": "Math & Geometry",
     "name": "Matrix & Math Tricks",
     "whenToUse": "In-place matrix rotation or traversal, digit manipulation, fast exponentiation.",
     "keyIdea": "Rotate 90° clockwise = reverse rows, then transpose. Spiral = shrink four boundaries. pow(x, n) halves n each step.",
@@ -797,6 +852,7 @@ export const PATTERNS = [
   {
     "id": 55,
     "topic": "Bit Manipulation",
+    "tag": "Bit Manipulation",
     "name": "XOR & Bit Tricks",
     "whenToUse": "Pairs cancel out, counting set bits, masks, or arithmetic without the + operator.",
     "keyIdea": "x ^ x = 0 and x ^ 0 = x, so XOR everything. n & (n − 1) clears the lowest set bit. ans[i] = ans[i >> 1] + (i & 1).",
@@ -810,6 +866,149 @@ export const PATTERNS = [
       "Reverse Bits",
       "Sum of Two Integers",
       "Reverse Integer"
+    ]
+  },
+  {
+    "id": 56,
+    "topic": "Bonus",
+    "tag": "Bonus · Matrix",
+    "name": "Spiral Matrix: Shrinking Boundaries",
+    "whenToUse": "Walk or fill a matrix layer by layer: spiral order, spiral fill, ring-by-ring rotation.",
+    "keyIdea": "Keep top, bottom, left and right bounds. Take the top row, right column, bottom row, left column, then shrink. Re-check the bounds before the last two sides so single rows and columns are not read twice.",
+    "complexity": "Time O(R·C) · Space O(1)",
+    "code": "def spiral_order(m):\n    res = []\n    top, bot, left, right = 0, len(m) - 1, 0, len(m[0]) - 1\n    while top <= bot and left <= right:\n        res += m[top][left:right + 1]\n        res += [m[r][right] for r in range(top + 1, bot + 1)]\n        if top < bot:\n            res += m[bot][left:right][::-1]\n        if left < right:\n            res += [m[r][left] for r in range(bot-1, top, -1)]\n        top += 1; bot -= 1; left += 1; right -= 1\n    return res",
+    "problems": [
+      "Spiral Matrix",
+      "Rotate Image",
+      "Set Matrix Zeroes",
+      "Spiral Matrix II"
+    ]
+  },
+  {
+    "id": 57,
+    "topic": "Bonus",
+    "tag": "Bonus · Greedy",
+    "name": "Bracket Balance: Minimum Fixes",
+    "whenToUse": "Fewest additions, removals or swaps to make brackets valid, or validity with a wildcard.",
+    "keyIdea": "One pass with a balance counter. A “)” with nothing to match is one fix. Leftover “(” at the end are the rest. For a wildcard “*”, track the range [lo, hi] of possible balances.",
+    "complexity": "Time O(n) · Space O(1)",
+    "code": "def min_add_to_make_valid(s):\n    bal = add = 0\n    for c in s:\n        if c == \"(\":\n            bal += 1            # waiting for \")\"\n        elif bal:\n            bal -= 1            # matched\n        else:\n            add += 1            # need a \"(\"\n    return add + bal     # plus unmatched \"(\"",
+    "problems": [
+      "Valid Parenthesis String",
+      "Minimum Add to Make Parentheses Valid",
+      "Minimum Remove to Make Valid Parentheses",
+      "Minimum Swaps to Make String Balanced"
+    ]
+  },
+  {
+    "id": 58,
+    "topic": "Bonus",
+    "tag": "Bonus · Strings",
+    "name": "Palindromes: Expand Around Center",
+    "whenToUse": "Longest palindromic substring, or counting every palindromic substring.",
+    "keyIdea": "Every palindrome has a centre: one character (odd length) or the gap between two (even length). Expand outward while both ends match. Manacher’s algorithm does the same in O(n).",
+    "complexity": "Time O(n²) · Space O(1)",
+    "code": "def longest_palindrome(s):\n    best = \"\"\n    for i in range(len(s)):\n        for l, r in ((i, i), (i, i + 1)):  # odd, even\n            while l >= 0 and r < len(s) and s[l] == s[r]:\n                l -= 1; r += 1\n            if r - l - 1 > len(best):\n                best = s[l + 1:r]\n    return best",
+    "problems": [
+      "Longest Palindromic Substring",
+      "Palindromic Substrings",
+      "Valid Palindrome II",
+      "Longest Palindromic Subsequence (DP version)"
+    ]
+  },
+  {
+    "id": 59,
+    "topic": "Bonus",
+    "tag": "Bonus · Arrays",
+    "name": "Cyclic Sort: Index as Hash",
+    "whenToUse": "Values lie in 1..n and you must find missing or duplicate numbers in O(1) extra space.",
+    "keyIdea": "Treat the array as its own hash table. Swap each value v to its home slot v − 1. Afterwards the first slot holding the wrong value reveals the missing number.",
+    "complexity": "Time O(n) · Space O(1)",
+    "code": "def first_missing_positive(nums):\n    n = len(nums)\n    for i in range(n):\n        while 0 < nums[i] <= n:\n            j = nums[i] - 1\n            if nums[j] == nums[i]: break\n            nums[i], nums[j] = nums[j], nums[i]\n    for i in range(n):\n        if nums[i] != i + 1:\n            return i + 1\n    return n + 1",
+    "problems": [
+      "First Missing Positive",
+      "Missing Number",
+      "Find the Duplicate Number",
+      "Find All Numbers Disappeared in an Array"
+    ]
+  },
+  {
+    "id": 60,
+    "topic": "Bonus",
+    "tag": "Bonus · Dynamic Programming",
+    "name": "State-Machine DP (Stocks)",
+    "whenToUse": "Day-by-day decisions with a few states: holding, sold, resting, or transaction limits.",
+    "keyIdea": "One variable per state. Each day, compute every state from yesterday’s states. Save the old value before overwriting it.",
+    "complexity": "Time O(n) · Space O(1)",
+    "code": "def max_profit(prices):  # with cooldown\n    hold, sold, rest = float(\"-inf\"), 0, 0\n    for p in prices:\n        prev_sold = sold\n        sold = hold + p\n        hold = max(hold, rest - p)\n        rest = max(rest, prev_sold)\n    return max(sold, rest)",
+    "problems": [
+      "Best Time to Buy and Sell Stock with Cooldown",
+      "Best Time to Buy and Sell Stock II",
+      "Best Time to Buy and Sell Stock"
+    ]
+  },
+  {
+    "id": 61,
+    "topic": "Bonus",
+    "tag": "Bonus · Sorting",
+    "name": "Quickselect (Partition)",
+    "whenToUse": "The k-th smallest or largest element without sorting everything, or partitioning around a pivot.",
+    "keyIdea": "Partition like quicksort, but continue only on the side that contains index k. Pick a random pivot to avoid the worst case on sorted input.",
+    "complexity": "Avg O(n) · Worst O(n²)",
+    "code": "def find_kth_largest(nums, k):\n    k = len(nums) - k  # sorted index\n    lo, hi = 0, len(nums) - 1\n    while lo < hi:\n        p, i = nums[hi], lo\n        for j in range(lo, hi):\n            if nums[j] < p:\n                nums[i], nums[j] = nums[j], nums[i]; i += 1\n        nums[i], nums[hi] = nums[hi], nums[i]\n        if i == k: break\n        if i < k: lo = i + 1\n        else: hi = i - 1\n    return nums[k]",
+    "problems": [
+      "Kth Largest Element in an Array",
+      "Sort Colors",
+      "Sort an Array",
+      "K Closest Points to Origin"
+    ]
+  },
+  {
+    "id": 62,
+    "topic": "Bonus",
+    "tag": "Bonus · Dynamic Programming",
+    "name": "Interval DP",
+    "whenToUse": "The best way to split or collapse a range: burst balloons, cut a stick, matrix chain.",
+    "keyIdea": "dp[l][r] is the best for the range between l and r. Choose the LAST item k to act in that range, so the two sides are independent. Fill by increasing range length.",
+    "complexity": "Time O(n³) · Space O(n²)",
+    "code": "def max_coins(nums):\n    a = [1] + nums + [1]\n    n = len(a)\n    dp = [[0] * n for _ in range(n)]\n    for length in range(2, n):\n        for l in range(n - length):\n            r = l + length\n            for k in range(l + 1, r):  # last to burst\n                gain = a[l] * a[k] * a[r]\n                dp[l][r] = max(dp[l][r], dp[l][k] + gain + dp[k][r])\n    return dp[0][n - 1]",
+    "problems": [
+      "Burst Balloons",
+      "Minimum Cost to Cut a Stick",
+      "Minimum Score Triangulation of Polygon"
+    ]
+  },
+  {
+    "id": 63,
+    "topic": "Bonus",
+    "tag": "Bonus · Intervals",
+    "name": "Sweep Line",
+    "whenToUse": "Maximum overlap, meeting rooms, car capacity over time, skyline: anything about what is active at a point.",
+    "keyIdea": "Turn each interval into events: +1 at its start, −1 at its end. Sort the events and sweep left to right with a running count. At equal times, process ends before starts.",
+    "complexity": "Time O(n log n) · Space O(n)",
+    "code": "def min_meeting_rooms(intervals):\n    events = []\n    for s, e in intervals:\n        events.append((s, 1))   # room needed\n        events.append((e, -1))  # room freed\n    events.sort()  # (t, -1) sorts before (t, 1)\n    rooms = best = 0\n    for _, delta in events:\n        rooms += delta\n        best = max(best, rooms)\n    return best",
+    "problems": [
+      "Meeting Rooms II",
+      "Car Pooling",
+      "My Calendar I and II",
+      "The Skyline Problem"
+    ]
+  },
+  {
+    "id": 64,
+    "topic": "Bonus",
+    "tag": "Bonus · Dynamic Programming",
+    "name": "Game Theory: Minimax DP",
+    "whenToUse": "Two players alternate optimal moves and you must say who wins or by how much.",
+    "keyIdea": "Define the state as the best lead the player to move can get. Their gain minus the opponent’s best reply from the remaining state. Also look for a pattern first (Nim: lose iff n % 4 == 0).",
+    "complexity": "Time O(n²) · Space O(n)",
+    "code": "def stone_game(piles):\n    n = len(piles)\n    dp = piles[:]  # best lead on [i..i]\n    for length in range(2, n + 1):\n        for l in range(n - length + 1):\n            r = l + length - 1\n            dp[l] = max(piles[l] - dp[l + 1],\n                    piles[r] - dp[l])\n    return dp[0] > 0\ndef can_win_nim(n):\n    return n % 4 != 0",
+    "problems": [
+      "Stone Game",
+      "Predict the Winner",
+      "Nim Game",
+      "Can I Win",
+      "Stone Game II"
     ]
   }
 ];

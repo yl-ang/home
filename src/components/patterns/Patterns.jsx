@@ -4,6 +4,8 @@ import SpotPattern from "./SpotPattern";
 import { PATTERNS } from "./patternsData";
 import "./Patterns.css";
 
+const CORE = PATTERNS.filter((p) => p.topic !== "Bonus").length;
+
 const TABS = [
   { id: "flashcards", label: "flashcards" },
   { id: "spot", label: "spot the pattern" },
@@ -25,7 +27,7 @@ const Patterns = () => {
         <p className="pt__label">{"// patterns/"}</p>
         <h1 id="pt-heading" className="pt__heading">LeetCode Patterns</h1>
         <p className="pt__sub">
-          {PATTERNS.length} patterns from the NeetCode 250, as flashcards. Pick a topic, guess the idea,
+          {CORE} patterns from the NeetCode 250 plus {PATTERNS.length - CORE} bonus ones, as flashcards. Pick a topic, guess the idea,
           flip to check, and mark what sticks.
         </p>
 
