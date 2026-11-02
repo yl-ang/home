@@ -9,7 +9,7 @@ const mainBody = {
   firstName: "Ang Yong Liang",
   middleName: "",
   lastName: "",
-    message: "Software Engineer | Platform Engineer | Data Engineer",
+    message: "Software Engineer | Distributed Systems | AI Engineering",
   icons: [
     {
       image: "fa-github",

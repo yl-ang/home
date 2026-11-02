@@ -7,7 +7,7 @@ import "./AboutMe.css";
 
 // Short bullet lines beside the photo.
 const HIGHLIGHTS = [
-  "Software · Platform · Data Engineer",
+  "Software · Distributed Systems · AI Engineering",
   "JPMorgan · Post Trade Engineering",
   "NUS · Computer Science",
 ];
