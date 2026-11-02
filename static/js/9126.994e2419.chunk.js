@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdevelopers_portfolio=self.webpackChunkdevelopers_portfolio||[]).push([[9126],{9126:function(e,n,o){o.r(n),o.d(n,{EventModelingModule:function(){return r.w},createEventModelingServices:function(){return r.h}});var r=o(2626);o(4642)}}]);
