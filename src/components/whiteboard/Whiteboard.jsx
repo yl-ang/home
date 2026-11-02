@@ -9,6 +9,9 @@ import {
 } from "@excalidraw/excalidraw";
 import "@excalidraw/excalidraw/index.css";
 import { BLANK, BLANK_ID, TEMPLATE_OPTIONS } from "./templates";
+import { copyText } from "./clipboard";
+import { CopyFallbackDialog, ImportDialog } from "./ShareDialogs";
+import { containsShareCode, exportShareText, toMermaid } from "./shareCode";
 import "./Whiteboard.css";
 
 const STORAGE_KEY = "wb-blank-scene-v1";
@@ -93,6 +96,7 @@ const Whiteboard = () => {
   const [status, setStatus] = useState("");
   const [large, setLarge] = useState(false);
   const [notes, setNotes] = useState(readNotes);
+  const [dialog, setDialog] = useState(null); // { type: "import" | "copy", text }
 
   const templateRef = useRef(DEFAULT_TEMPLATE);
   const loadedSig = useRef("");
@@ -100,6 +104,7 @@ const Whiteboard = () => {
   const saveTimer = useRef(null);
   const notesTimer = useRef(null);
   const notesRef = useRef(notes);
+  const canvasRef = useRef(null);
 
   const template = byId(templateId);
 
@@ -162,7 +167,7 @@ const Whiteboard = () => {
   // Large mode: lock page scroll, close on Escape, and refit once the canvas has resized.
   useEffect(() => {
     if (!large) return undefined;
-    const onKey = (e) => e.key === "Escape" && setLarge(false);
+    const onKey = (e) => e.key === "Escape" && !e.defaultPrevented && setLarge(false);
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKey);
@@ -182,6 +187,24 @@ const Whiteboard = () => {
     return () => clearTimeout(t);
   }, [api, large]);
 
+  // A share code pasted while the canvas is focused opens the import dialog instead of becoming a text box.
+  useEffect(() => {
+    if (!api) return undefined;
+    const onPaste = (e) => {
+      const target = e.target;
+      const editable = target && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName));
+      const inCanvas = canvasRef.current && canvasRef.current.contains(document.activeElement || target);
+      if (editable || !inCanvas) return;
+      const text = e.clipboardData && e.clipboardData.getData("text/plain");
+      if (!containsShareCode(text)) return;
+      e.preventDefault();
+      e.stopPropagation(); // capture phase: Excalidraw never sees it
+      setDialog({ type: "import", text });
+    };
+    window.addEventListener("paste", onPaste, true);
+    return () => window.removeEventListener("paste", onPaste, true);
+  }, [api]);
+
   const handleNotes = (e) => {
     const next = { ...notesRef.current, [templateId]: e.target.value };
     notesRef.current = next;
@@ -200,13 +223,18 @@ const Whiteboard = () => {
     [flushSave]
   );
 
-  const handleSelect = (e) => {
-    const next = e.target.value;
-    if (!api || next === templateId) return;
+  // Keep the current drawing for "restore it" when it holds work that would otherwise be lost.
+  const stashCurrent = () => {
     flushSave();
     const elements = api.getSceneElements();
     const edited = elements.length > 0 && (templateId === BLANK_ID || signature(elements) !== loadedSig.current);
     setBackup(edited ? { templateId, title: template.title, elements, appState: viewState(api.getAppState()) } : null);
+  };
+
+  const handleSelect = (e) => {
+    const next = e.target.value;
+    if (!api || next === templateId) return;
+    stashCurrent();
     setStatus("");
     setTemplateId(next);
     loadTemplate(next);
@@ -220,6 +248,46 @@ const Whiteboard = () => {
     loadedSig.current = "";
     if (backup.templateId === BLANK_ID) writeBlank(backup.elements, { ...api.getAppState(), ...backup.appState });
     setBackup(null);
+  };
+
+  const copyShareCode = async () => {
+    const elements = api.getSceneElements();
+    if (elements.length === 0) {
+      setStatus("Nothing to copy yet. Draw something first.");
+      return;
+    }
+    try {
+      const { text, count, chars } = await exportShareText({ elements, appState: api.getAppState(), files: api.getFiles() });
+      if (!(await copyText(text))) {
+        setDialog({ type: "copy", text });
+        setStatus("Clipboard blocked, copy the code manually.");
+      } else {
+        setStatus(count === 1 ? `Copied 1 part, ${chars.toLocaleString()} chars` : `Copied ${count} parts, paste each as its own message`);
+      }
+    } catch (err) {
+      setStatus(`Copy failed: ${err.message || err}`);
+    }
+  };
+
+  const copyMermaid = async () => {
+    const { text, nodes, edges } = toMermaid(api.getSceneElements());
+    if (nodes === 0) {
+      setStatus("No labelled shapes to convert yet.");
+      return;
+    }
+    if (await copyText(text)) setStatus(`Copied Mermaid: ${nodes} nodes, ${edges} edges (lossy, one-way)`);
+    else setDialog({ type: "copy", text });
+  };
+
+  const loadImported = (scene) => {
+    stashCurrent();
+    const files = Object.values(scene.files || {});
+    if (files.length > 0) api.addFiles(files);
+    loadScene(scene.elements, scene.appState);
+    // Imported work counts as edited, so switching templates keeps a backup.
+    loadedSig.current = "";
+    setDialog(null);
+    setStatus(`Loaded ${scene.elements.length} elements from text`);
   };
 
   const exportScene = async (kind) => {
@@ -303,7 +371,7 @@ const Whiteboard = () => {
               </svg>
             </button>
           </div>
-          <div className="wb-canvas">
+          <div className="wb-canvas" ref={canvasRef}>
             <Excalidraw
               excalidrawAPI={setApi}
               onChange={handleChange}
@@ -321,8 +389,26 @@ const Whiteboard = () => {
           <button type="button" className="wb-btn" onClick={() => exportScene("svg")} disabled={!api}>
             export SVG
           </button>
+          <button type="button" className="wb-btn" onClick={copyShareCode} disabled={!api} aria-label="Copy drawing as share code text">
+            copy as text
+          </button>
+          <button type="button" className="wb-btn" onClick={() => setDialog({ type: "import", text: "" })} disabled={!api} aria-label="Paste drawing from share code text">
+            paste from text
+          </button>
+          <button type="button" className="wb-btn wb-btn--ghost" onClick={copyMermaid} disabled={!api} aria-label="Copy as Mermaid flowchart, one-way and lossy" title="One-way and lossy: labelled shapes and bound arrows only">
+            copy as Mermaid
+          </button>
           <span className="wb-status" role="status">{status}</span>
         </div>
+        {dialog && dialog.type === "import" && (
+          <ImportDialog
+            initialText={dialog.text}
+            replacing={api.getSceneElements().length > 0}
+            onLoad={loadImported}
+            onClose={() => setDialog(null)}
+          />
+        )}
+        {dialog && dialog.type === "copy" && <CopyFallbackDialog text={dialog.text} onClose={() => setDialog(null)} />}
         <p className="wb-hint">On touch screens, drag with two fingers to pan; scroll the page from the margins outside the canvas.</p>
 
         <div className="wb-info">
